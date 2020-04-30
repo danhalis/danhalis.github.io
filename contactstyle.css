@@ -101,28 +101,6 @@ nav {
     display: none;
 }
 
-#hero-section {
-    display: flex;
-    flex-direction: column;
-    background-color: rgb(238, 238, 238);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: grey solid 1px;
-}
-
-#profile-photo {
-    min-width: 320px;
-}
-
-#profile-info {
-    padding: 10px;
-    margin-bottom: 5px;
-    height: 160px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
 h2 {
     margin-bottom: 5px; 
 }
@@ -131,81 +109,8 @@ span {
     font-weight: 620;
 }
 
-#see-more-button {
-    display: flex;
-    border-style: none;
-    color: rgb(103, 103, 114);
-    background: none;
-    width: fit-content;
-    margin-left: 10px;
-}
 
-#see-less-button {
-    display: none;
-    border-style: none;
-    color: rgb(103, 103, 114);
-    background: none;
-    width: fit-content;
-    margin-left: 10px;
-}
 
-#skills-section {
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.skills-content {
-    display: flex;
-}
-
-.skills {
-    border: solid grey 1px;
-    border-radius: 15px;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-}
-
-.skills h3 {
-    padding-left: 5px;
-    padding-top: 5px;
-}
-
-.svg-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.svg-wrapper svg {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 10px;
-}
-
-.svg-source {
-    font-size: small;
-    text-align: end;
-}
-
-.svg-source a {
-    color: rgb(103, 103, 114);
-}
-
-.text-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    padding-left: 20px;
-}
-
-.text-wrapper span {
-    margin-bottom: 5px;
-}
-
-.text-wrapper p {
-    padding-bottom: 10px;
-}
 
 footer {
     background-color: rgb(87, 88, 88);
@@ -266,26 +171,6 @@ footer h3 {
         width: fit-content;
         right: 0;
     }
-
-    #hero-section {
-        align-items: center;
-    }
-
-    #profile-photo {
-        border-radius: 50%;
-        width: 30%;
-        padding: 20px 0;
-    }
-
-    #profile-info {
-        align-items: center;
-    }
-
-    #profile-info p {
-        width: 450px;
-        padding: 5px 0;
-        text-align: justify;
-    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -316,85 +201,6 @@ footer h3 {
 
     main p {
         font-size: 18px;
-    }
-
-    #profile-photo {
-        padding-top: 30px;
-    }
-
-    #profile-info {
-        height: unset;
-    }
-
-    #profile-info {
-        font-size: 30px;
-    }
-
-    #profile-info p {
-        width: 600px;
-        padding: 10px 0;
-    }
-    
-    #see-more-button {
-        display: none;
-    }
-
-    #skills-section {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto;
-        grid-auto-rows: 500px;
-        gap: 20px;
-        padding: 0 25px;
-        margin-bottom: 50px;
-    }
-
-    #skills-section h2 {
-        grid-column: 1/4;
-        text-align: center;
-    }
-
-    .skills {
-        margin: 0;
-    }
-
-    .skills h3 {
-        text-align: center;
-        padding-top: 10px;
-        margin-bottom: 20px;
-        font-size: 19px;
-    }
-
-    .svg-wrapper svg {
-        display: flex;
-        justify-content: center;
-        width: 90px;
-        height: 90px;
-        margin-bottom: 20px;
-    }
-
-    .skills-content {
-        flex-direction: column;
-    }
-
-    .svg-wrapper {
-        margin-bottom: 25px;
-    }
-
-    .text-wrapper {
-        display: flex;
-        flex-direction: column;
-        padding: 0;
-        align-items: center;
-    }
-
-    .text-wrapper p {
-        width: 300px;
-        text-align: center;
-    }
-
-    .text-wrapper p:nth-child(1) {
-        height: 170px;
     }
 
     footer h3 {
