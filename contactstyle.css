@@ -101,16 +101,60 @@ nav {
     display: none;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 h2 {
-    margin-bottom: 5px; 
+    margin: 30px 0 5px; 
 }
 
 span {
     font-weight: 620;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
 
+.info {
+    margin: 5px 0 10px;
+}
 
+p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    border: black solid 1px;
+}
+
+#email {
+    margin-left: 30px;
+}
+
+textarea {
+    width: 90%;
+    resize: none;
+}
+
+button {
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+}
 
 footer {
     background-color: rgb(87, 88, 88);

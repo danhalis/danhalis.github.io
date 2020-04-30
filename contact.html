@@ -42,6 +42,57 @@
             </section>
         </section>
 
+        <main>
+            <h2>Hello! How can I help you?</h2>
+            <form action="#">
+                <div class="info">
+                    <label for="fname">Name:</label>
+                    <input type="text" name="fname" required>
+                </div>
+                <div class="info">
+                    <label for="email">Email:</label>
+                    <input type="email" name="fmail">
+                </div>
+                <div class="info">
+                    <label for="fphone">Phone number:</label>
+                    <input type="tel" name="fphone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+                </div>
+
+                <div class="info">
+                    <P>Please select your favorite contact method:</P>
+                    <input required type="radio" id="phone" name="contact-method" value="phone">
+                    <label for="phone">Phone</label>
+                    <input required type="radio" id="email" name="contact-method" value="email">
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="info">
+                    <p>Please select your province:</p>
+                    <label for="provinces">Choose a province</label>
+                    <select id="provinces">
+                        <option value="alberta">Alberta</option>
+                        <option value="british-columbia">British Columbia</option>
+                        <option value="labrador">Labrador</option>
+                        <option value="manitoba">Manitoba</option>
+                        <option value="new-brunswick">New Brunswick</option>
+                        <option value="newfoundland">Newfoundland</option>
+                        <option value="nova-scotia">Nova Scotia</option>
+                        <option value="ontario">Ontario</option>
+                        <option value="prince-edward-island">Prince Edward Island</option>
+                        <option value="quebec">Québec</option>
+                        <option value="saskatchewan">Saskatchewan</option>
+                    </select>
+                </div>
+
+                <div class="info">
+                    <label for="fmessage">Your message here:</label>
+                    <br>
+                    <textarea name="fmessage" id="message" rows="10" required></textarea>
+                </div>
+
+                <button>Submit</button>
+            </form>
+        </main>
 
         <footer>
             <h3>Follow Me</h3>
@@ -58,8 +109,5 @@
                 </a>
             </div>
         </footer>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="script.js"></script>
     </body>
 </html>
