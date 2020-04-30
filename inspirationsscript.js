@@ -28,74 +28,80 @@ $(document).ready(function()
     // });
 });
 
-let slide1 = { currentIndex: 0}; 
-let slide2 = { currentIndex: 0};
-let slides1 = "img-slide-1";
+let screens = [
+    screen_1 = { currentIndex: 0 },
+    screen_2 = { currentIndex: 0 }
+]
+let images = [
+    "slided-img-1", 
+    "slided-img-2"
+];
 // let dots1 = "dot-1";
-let slides2 = "img-slide-2";
 // let dots2 = "dot-2";
 
-showSlide(slide1, slides1/*, dots1*/);
-showSlide(slide2, slides2/*, dots2*/);
+for (let i = 0; i < images.length; i++)
+{
+    showSlide(screens[i], images[i]/*, dots1*/);
+}
 
 $(".prev-1").click(function() 
 {
-    changeSlide(-1, slide1, slides1/*, dots1*/)
+    changeSlide(-1, screens[0], images[0]/*, dots1*/)
 });
 
 $(".next-1").click(function() 
 {
-    changeSlide(1, slide1, slides1/*, dots1*/)
+    changeSlide(1, screens[0], images[0]/*, dots1*/)
 });
 
 $(".prev-2").click(function() 
 {
-    changeSlide(-1, slide2, slides2/*, dots2*/)
+    changeSlide(-1, screens[1], images[1]/*, dots2*/)
 });
 
 $(".next-2").click(function() 
 {
-    changeSlide(1, slide2, slides2/*, dots2*/)
+    changeSlide(1, screens[1], images[1]/*, dots2*/)
 });
 
-function changeSlide(step, targetSlide, slidesToChange/*, dotsToChange*/) 
+function changeSlide(step, targetScreen, imgToSlide/*, dotsToChange*/) 
 {
-    targetSlide.currentIndex += step; // change current slide index //
-    showSlide(targetSlide, slidesToChange/*, dotsToChange*/); 
+    targetScreen.currentIndex += step; // change current slide index //
+    showSlide(targetScreen, imgToSlide/*, dotsToChange*/); 
 };
 
 function updateSlideIndex1(newSlideIndex) 
 {
-    slide1.currentIndex = newSlideIndex;
-    showSlide(slide1, slides1/*, dots2*/);
+    screens[0].currentIndex = newSlideIndex;
+    showSlide(screens[0], images[0]/*, dots2*/);
 };
 
 function updateSlideIndex2(newSlideIndex) 
 {
-    slide2.currentIndex = newSlideIndex;
-    showSlide(slide2, slides2/*, dots2*/);
+    screens[1].currentIndex = newSlideIndex;
+    showSlide(screens[1], images[1]/*, dots2*/);
 };
 
-function showSlide(dtargetSlide, dslidesToChange/*, ddotsToChange*/) {
-    let slides = document.getElementsByClassName(dslidesToChange);
+function showSlide(targetScreen, imgToSlide/*, ddotsToChange*/) {
+    let targetImages = document.getElementsByClassName(imgToSlide);
     // let dots = document.getElementsByClassName(ddotsToChange);
 
     // reset the index if overflow //
-    if (dtargetSlide.currentIndex > slides.length-1)
+    if (targetScreen.currentIndex > targetImages.length-1)
         // surpass last index //
     {
-        dtargetSlide.currentIndex = 0;
+        targetScreen.currentIndex = 0;
     }
 
-    if (dtargetSlide.currentIndex < 0) 
+    if (targetScreen.currentIndex < 0) 
         // before first index //
     {
-        dtargetSlide.currentIndex = slides.length-1;
+        targetScreen.currentIndex = targetImages.length - 1;
     }
 
-    for (let i = 0; i < slides.length; i++) // wipe out all imgs
+    for (let i = 0; i < targetImages.length; i++) // wipe out all imgs
     {
-        slides[i].style.display = "none";
+        targetImages[i].style.display = "none";
     }
 
     // for (let i = 0; i < dots.length; i++) // deactivate all dots
@@ -103,6 +109,6 @@ function showSlide(dtargetSlide, dslidesToChange/*, ddotsToChange*/) {
     //     dots[i].className = dots[i].className.replace(" active", "");
     // }
 
-    slides[dtargetSlide.currentIndex].style.display = "flex"; // show img at current index
+    targetImages[targetScreen.currentIndex].style.display = "flex"; // show img at current index
     // dots[dtargetSlide.currentIndex].className += " active"; // activate dot at current index
 };
