@@ -92,13 +92,21 @@ nav {
 
 #dropdown-content ul li {
     display: flex;
-    padding: 5px 0;
+    padding: 15px 0;
+}
+
+#dropdown-content ul li a {
+    font-size: 18px;
 }
 
 #inline-menu {
     width: 80%;
     justify-content: space-evenly;
     display: none;
+}
+
+main p {
+    line-height: 1.5em;
 }
 
 #hero-section {
