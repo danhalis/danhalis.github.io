@@ -1,0 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: -apple-system,BlinkMacSystemFont,segoe ui,roboto,oxygen,cantarell,helvetica neue,ubuntu,sans-serif;
+}
+
+body {
+    margin: 0 auto;
+    min-width: 320px;
+    max-width: 1270px;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#nav-and-dropdown {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+
+nav {
+    display: flex;
+    height: 50px;
+    background-color: rgb(87, 88, 88);
+    justify-content: space-between;
+    align-items: center;
+}
+
+#author-name {
+    width: fit-content;
+    padding: 10px 5px;
+    margin-left: 10px;
+}
+
+#author-name p {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#menu-section {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#burger-menu-button {
+    background: none;
+    border-style: none;
+    padding: 5px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+}
+
+#burger-menu-button svg {
+    width: 27px;
+    height: 27px;
+}
+
+#dropdown-content {
+    flex: 1;
+    display: none;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    background-color: rgb(87, 88, 88);
+}
+
+#dropdown-content ul {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px 10px;
+}
+
+#dropdown-content ul li:nth-child(1) {
+    border-bottom: ridge rgb(160, 158, 158) 2px;
+}
+
+#dropdown-content ul li:nth-child(1) a {
+    margin: 5px 0;
+}
+
+#dropdown-content ul li {
+    display: flex;
+}
+
+#dropdown-content ul li a {
+    font-size: 18px;
+    padding: 15px 5px;
+}
+
+#dropdown-content ul li a:hover {
+    color: rgb(216, 216, 216);
+}
+
+#inline-menu {
+    width: 80%;
+    justify-content: space-evenly;
+    display: none;
+}
+
+#tv-in-dark-room {
+    width: 400px;
+    height: 400px;
+}
+
+footer {
+    background-color: rgb(87, 88, 88);
+}
+
+footer h3 {
+    color: white;
+    padding-top: 5px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+#social-medias {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    width: fit-content;
+}
+
+#social-medias a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#social-medias a svg {
+    width: 30px;
+    height: 30px;
+}
+
+#social-medias a:nth-child(1) svg {
+    padding: 4px;
+}
+
+#social-medias a p {
+    padding-left: 5px;
+}
+
+@media screen and (min-width: 768px) {
+    #author-name {
+        margin-left: 15px;
+    }
+
+    #author-name p {
+        font-size: 21px;
+    }
+
+    #burger-menu-button {
+        padding: 5px;
+    }
+
+    #burger-menu-button svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    #dropdown-content {
+        width: fit-content;
+        right: 0;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    nav {
+        height: 60px;
+    }
+
+    #burger-menu-button {
+        display: none;
+    }
+
+    #inline-menu {
+        display: flex;
+    }
+
+    #inline-menu li {
+        display: flex;
+        padding: 5px;
+        font-weight: 600;
+        font-size: 18px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #inline-menu li a {
+        padding: 15px;
+    }
+
+    #inline-menu li a:hover {
+        color: rgb(216, 216, 216);
+    }
+
+    main h2 {
+        font-size: 30px;
+    }
+
+    main p {
+        font-size: 18px;
+    }
+
+    footer h3 {
+        font-size: 21px;
+    }
+
+    #social-medias a svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    #social-medias a:nth-child(1) svg {
+        padding: 5px;
+    }
+
+    #social-medias a p {
+        padding-left: 10px;
+    }
+} 
