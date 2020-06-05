@@ -109,9 +109,42 @@ nav {
     display: none;
 }
 
-#tv-in-dark-room {
-    width: 400px;
-    height: 400px;
+h1 {
+    font-size: 20px;
+    margin-top: 25px;
+    text-align: center;
+    padding: 5px;
+    background-color: rgb(238, 238, 238);
+    border-top: solid grey 1px;
+    border-bottom: solid grey 1px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+article {
+    padding: 5px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+iframe {
+    width: 100%;
+    border: 0px;
+}
+
+img {
+    width: 100%;
+}
+
+video {
+    width: 100%;
 }
 
 footer {

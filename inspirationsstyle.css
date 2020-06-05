@@ -114,9 +114,10 @@ main p {
 }
 
 h1 {
+    font-size: 20px;
     margin-top: 25px;
     text-align: center;
-    padding: 10px 0 15px;
+    padding: 5px;
     background-color: rgb(238, 238, 238);
     border-top: solid grey 1px;
     border-bottom: solid grey 1px;

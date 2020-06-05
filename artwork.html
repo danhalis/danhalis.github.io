@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="author" content="Hieu Dao Le Duc">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>My Artworks</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/9725bd125c.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="artworkStyle.css">
     </head>
     <body>
@@ -38,10 +42,33 @@
             </section>
         </section>
 
-        <h1>This page is not yet done ...</h1>
+        <section id="header-meassage">This page is not yet done ...</section>
 
-        <h2>My p5.js project</h2>
-        <iframe id="tv-in-dark-room" src="https://editor.p5js.org/danhalis/embed/R_Dm2CSWY"></iframe>
+        <h1>My Artworks</h1>
+
+        <article>
+            <h2>p5.js</h2>
+            <div class="gallery">
+                <iframe src="https://editor.p5js.org/danhalis/embed/R_Dm2CSWY"></iframe>
+            </div>
+        </article>
+        
+        <article>
+            <h2>Sketches</h2>
+            <div class="gallery">
+                <img src="assets/artworks/avicii-drawing.png" alt="My Avicii drawing">
+                <img src="assets/artworks/dimitri-vegas-like-mike.png" alt="My Dimitri Vegas & Like Mike drawing">
+            </div>
+        </article>
+
+        <article>
+            <h2>Music</h2>
+            <div class="gallery">
+                <video controls>
+                    <source src="assets/artworks/still-cover.mp4" type="video/mp4">
+                </video>
+            </div>
+        </article>
 
         <footer>
             <h3>Follow Me</h3>
@@ -61,5 +88,6 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="indexscript.js"></script>
+        <!-- <script src="artworkscript.js"></script> -->
     </body>
 </html>
