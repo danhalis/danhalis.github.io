@@ -121,9 +121,9 @@ nav {
     border-bottom: solid 2px black;
 }
 
-h1 {
+#page-heading h1 {
     width: fit-content;
-    font-size: 25px;
+    font-size: 26px;
     margin: 0 auto;
     text-align: center;
     padding: 10px 5px 10px 13px;
@@ -363,6 +363,10 @@ footer h3 {
     main {
         margin: 0 auto;
         max-width: 900px;
+    }
+
+    #page-heading h1 {
+        font-size: 28px;
     }
 
     .gallery {
