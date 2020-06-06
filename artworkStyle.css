@@ -163,15 +163,13 @@ nav {
     padding: 10px;
 }
 
-#description p span:not(#emoji) {
+#description p span {
     font-weight: initial;
     font-size: 12px;
-    font-style: italic;
 }
 
-#emoji {
-    font-weight: initial;
-    font-size: 12px;
+#description p span:not(#emoji) {
+    font-style: italic;
 }
 
 .gallery {
@@ -322,7 +320,7 @@ footer h3 {
     }
 
     #description p span {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     h2 {
@@ -372,6 +370,10 @@ footer h3 {
     .gallery {
         padding: 10px;
         gap: 10px;
+    }
+
+    h2 {
+        font-size: 23px;
     }
 
     footer h3 {
