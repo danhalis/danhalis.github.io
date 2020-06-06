@@ -113,13 +113,19 @@ nav {
     background-color: rgb(206, 206, 206);
 } */
 
+#header-section {
+    background-color: rgb(238, 238, 238);
+    padding: 15px 0;
+    border-bottom: solid 2px black;
+}
+
 h1 {
     width: fit-content;
     font-size: 25px;
-    margin: 15px auto;
+    margin: 0 auto;
     text-align: center;
     padding: 10px 5px 10px 13px;
-    border: dashed 2px rgb(0, 0, 0);
+    border: dashed 2px black;
 }
 
 .word-wrapper {
