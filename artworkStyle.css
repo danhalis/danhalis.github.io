@@ -109,13 +109,14 @@ nav {
     display: none;
 }
 
-/* main {
-    background-color: rgb(206, 206, 206);
-} */
-
 #header-section {
+    display: flex;
+    flex-direction: column;
+}
+
+#page-heading {
     background-color: rgb(238, 238, 238);
-    padding: 15px 0;
+    padding: 25px 0;
     border-bottom: solid 2px black;
 }
 
@@ -138,6 +139,27 @@ h1 {
     color: rgb(255, 255, 255);
     padding: 0 3px;
     margin-right: 1px;
+}
+
+#description {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 85px;
+}
+
+#author-avatar {
+    width: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px;
+    left: 10px;
+}
+
+#description p {
+    padding: 10px;
+    position: absolute;
+    left: 120px;
 }
 
 .gallery {
