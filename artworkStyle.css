@@ -95,6 +95,7 @@ nav {
 }
 
 #dropdown-content ul li a {
+    width: 100%;
     font-size: 18px;
     padding: 15px 5px;
 }
@@ -145,7 +146,8 @@ h1 {
     display: flex;
     justify-content: center;
     position: relative;
-    height: 85px;
+    min-height: 85px;
+    border-bottom: rgb(202, 202, 202) solid 0.5px;
 }
 
 #author-avatar {
@@ -157,9 +159,17 @@ h1 {
 }
 
 #description p {
+    color: rgb(27, 27, 31);
+    font-weight: 600;
     padding: 10px;
     position: absolute;
-    left: 120px;
+    left: 110px;
+}
+
+#description p span {
+    font-weight: initial;
+    font-size: 12px;
+    font-style: italic;
 }
 
 .gallery {
