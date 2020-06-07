@@ -25,6 +25,7 @@ a {
     position: sticky;
     top: 0;
     z-index: 3;
+    /* position: relative; */
 }
 
 nav {
@@ -110,6 +111,14 @@ nav {
     display: none;
 }
 
+main {
+    /* display: flex;
+    flex-direction: column; */
+    /* align-items: center; */
+    margin: 0 auto;
+    max-width: 900px;
+}
+
 #header-section {
     display: flex;
     flex-direction: column;
@@ -183,12 +192,12 @@ nav {
 }
 
 article {
-    font-family: 'Euphoria Script', cursive;
     padding: 5px 0;
     margin-bottom: 10px;
 }
 
 h2 {
+    font-family: 'Euphoria Script', cursive;
     width: fit-content;
     font-size: 20px;
     color: rgb(27, 27, 31);
@@ -232,8 +241,78 @@ h2 {
 img {
     width: 100%;
 }
+
 video {
     width: 100%;
+}
+
+.bundle-of-img {
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+.bundle-of-img img {
+    display: none;
+}
+
+.bundle-of-img :nth-child(1) {
+    display: flex;
+}
+
+.popup {
+    display: none;
+    align-items: flex-start;
+    position: fixed;
+    z-index: 1;
+    padding-top: 10px;
+    top: 50px;
+    max-width: 1270px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.527);
+    overflow: auto;
+}
+
+.popup-content {
+    min-width: 320px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: rgba(54, 54, 54, 0.575);
+}
+
+.popup-img {
+    width: 100%;
+}
+
+.caption {
+    display: flex;
+    padding: 10px 25px 100px 15px;
+    position: relative;
+}
+
+.caption p {
+    color: white;
+    overflow: auto;
+    max-height: 180px;
+}
+
+.close-button {
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    border: 0px;
+    font-size: 40px;
+    height: 40px;
+    padding: 0 5px;
+    position: absolute;
+    top: 0px;
+    right: 0;
+}
+
+.close-button::selection {
+    border: 0px;
 }
 
 footer {
@@ -356,11 +435,6 @@ footer h3 {
 
     #inline-menu li a:hover {
         color: rgb(216, 216, 216);
-    }
-
-    main {
-        margin: 0 auto;
-        max-width: 900px;
     }
 
     #page-heading h1 {
