@@ -265,7 +265,7 @@ video {
     align-items: flex-start;
     position: fixed;
     z-index: 1;
-    padding-top: 50px;
+    /* padding-top: 50px; */
     top: 50px;
     width: 100%;
     max-width: 1270px;

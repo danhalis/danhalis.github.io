@@ -1,5 +1,6 @@
 let images = document.getElementsByClassName("img-to-display");
 let closeButtons = document.getElementsByClassName("close-button");
+let paddingTop = ((window.innerHeight - 50) / 15) + "px";
 
 function PopUpImage() {
     document.querySelector("#sketches-popup").style.display = "flex";
@@ -19,6 +20,7 @@ for (const img of images) {
     img.addEventListener("click", PopUpImage);
 }
 
+document.querySelector("#sketches-popup").style.paddingTop = paddingTop;
 document.querySelector("#sketches-popup").addEventListener("click", CloseImage)
 
 
