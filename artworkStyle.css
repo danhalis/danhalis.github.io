@@ -297,7 +297,7 @@ video {
 #popup-caption {
     color: white;
     overflow: auto;
-    max-height: 180px;
+    max-height: 130px;
 }
 
 figcaption {
