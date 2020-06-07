@@ -8,7 +8,8 @@ function PopUpImage() {
     imgToDisplay.alt = this.alt;
 }
 
-function CloseImage() {
+function CloseImage(event) {
+    if (event.target.className === "close-button" || event.target.className === "popup")
     document.querySelector("#sketches-popup").style.display = "none";
 }
 
@@ -16,9 +17,7 @@ for (const img of images) {
     img.addEventListener("click", PopUpImage);
 }
 
-for (const closeButton of closeButtons) {
-    closeButton.addEventListener("click", CloseImage);
-}
+document.querySelector("#sketches-popup").addEventListener("click", CloseImage)
 
 
 
