@@ -6,6 +6,8 @@ function PopUpImage() {
     let imgToDisplay = document.querySelector("#sketches-img div.popup-img img");
     imgToDisplay.src = this.src;
     imgToDisplay.alt = this.alt;
+    let popupCaption = document.querySelector("#popup-caption");
+    popupCaption.innerHTML = this.nextElementSibling.innerHTML;
 }
 
 function CloseImage(event) {

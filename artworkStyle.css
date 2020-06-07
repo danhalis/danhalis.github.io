@@ -267,6 +267,7 @@ video {
     z-index: 1;
     padding-top: 50px;
     top: 50px;
+    width: 100%;
     max-width: 1270px;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.527);
@@ -287,16 +288,20 @@ video {
     width: 100%;
 }
 
-.caption {
+.caption-block {
     display: flex;
     padding: 10px 25px 30px 15px;
     position: relative;
 }
 
-.caption p {
+#popup-caption {
     color: white;
     overflow: auto;
     max-height: 180px;
+}
+
+figcaption {
+    display: none;
 }
 
 .close-button {
