@@ -275,7 +275,6 @@ video {
     align-items: flex-start;
     position: fixed;
     z-index: 1;
-    /* padding-top: 50px; */
     top: 50px;
     width: 100%;
     max-width: 1270px;
@@ -316,6 +315,14 @@ video {
     overflow-y: hidden;
     scroll-behavior: smooth;
 }
+
+/* #img-holder {
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+} */
 
 #popup-img img {
     min-width: 100%;

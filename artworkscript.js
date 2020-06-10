@@ -1,15 +1,25 @@
 let currentSlides = null;
 let bundles = document.getElementsByClassName("bundle-of-img");
+let bundle = null; // the bundle chosen //
 
 if (bundles != null) {
     currentSlides = [0];
-    Array.prototype.slice.call(bundles);
     for (let i = 0; i < bundles.length - 1; i++) {
         currentSlides.push(0);
     }    
 }
 
 let images = document.getElementsByClassName("img-to-display");
+
+// global info about slider //
+let slider = {
+    bundleIndex: null,
+    currentSlide: null,
+    firstTouchX: null,
+    currentTouchX: null,
+    moveVector: null,
+    longTouch: null
+}
 
 function PopUpImage(event) {
     document.querySelector("#popup").style.display = "flex";
@@ -29,17 +39,23 @@ function PopUpImage(event) {
         let popupCaption = document.querySelector("#popup-caption");
         popupCaption.innerHTML = this.nextElementSibling.innerHTML;
     }
+
+    // if this is a bundle of images //
     else {
-        let index = null;
+        // Check index of this bundle //
         for (let i = 0; i < bundles.length; i++) {
             if (bundles[i] == event.currentTarget.parentNode) {
-                index = i;
+                slider.bundleIndex = i;
             }
         }
 
-        slider.currentSlide = currentSlides[index];
+        // Check out its current slide //
+        slider.currentSlide = currentSlides[slider.bundleIndex];
+
+        // Get its children images //
         bundle = event.currentTarget.parentNode.children;
 
+        // Fill the slider with those images //
         let sliderWrap = document.getElementById("popup-img");
         for (const img of bundle) {
             sliderWrap.innerHTML += img.outerHTML;
@@ -48,20 +64,16 @@ function PopUpImage(event) {
         // When the first image is loaded ...
         sliderWrap.children[0].addEventListener("load", CenterPopUp);
 
+        // When all images are loaded ...
+        sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
+            // Scroll to the current slide //
+            document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-content").offsetWidth, 0);
+        });
+
         sliderWrap.addEventListener("touchstart", ReadFirstTouch);
         sliderWrap.addEventListener("touchmove", ReadTouchMove);
         sliderWrap.addEventListener("touchend", ReadTouchEnd);
     }
-}
-
-let bundle = null;
-
-let slider = {
-    currentSlide: 0,
-    firstTouchX: null,
-    currentTouchX: null,
-    moveVector: null,
-    longTouch: null
 }
 
 function ReadFirstTouch(event) {
@@ -74,6 +86,8 @@ function ReadFirstTouch(event) {
     // Get X position of first touch //
     slider.firstTouchX = event.touches[0].clientX;
 }
+
+let momentum = null;
 
 function ReadTouchMove(event) {
     // Disable momentum while scrolling //
@@ -88,7 +102,7 @@ function ReadTouchMove(event) {
 
 function ReadTouchEnd() {
     let moveDistance = Math.abs(slider.moveVector);
-    if (moveDistance > (document.getElementById("popup-content").offsetWidth / 3) || !slider.longTouch) {
+    if (moveDistance > (document.getElementById("popup-content").offsetWidth / 6) || !slider.longTouch) {
         if (slider.moveVector > 0 && slider.currentSlide < bundle.length - 1) {
             slider.currentSlide++;
         }
@@ -97,8 +111,11 @@ function ReadTouchEnd() {
                 slider.currentSlide--;
             }
         }
+
+        currentSlides[slider.bundleIndex] = slider.currentSlide;
     }
 
+     // Scroll to the current slide //
     document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-content").offsetWidth, 0);
 }
 
@@ -110,9 +127,9 @@ function CenterPopUp() {
 
 function CloseImage(event) {
     if (event.target.id === "close-button" || event.target.id === "popup") {
+        // Clear the popup //
         document.getElementById("popup-img").innerHTML = "";
         document.querySelector("#popup").style.display = "none";
-        slider.currentSlide = 0;
     }
 }
 
