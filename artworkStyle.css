@@ -340,6 +340,24 @@ figcaption {
     min-width: 100%;
 }
 
+#slide-indicator {
+    display: flex;
+    padding: 10px 0 0;
+    justify-content: center;
+}
+
+#dots-wrapper {
+    display: none;
+    justify-content: space-between;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border: white solid 1px;
+    border-radius: 50%;
+}
+
 #caption-block {
     display: flex;
     padding: 10px 25px 30px 15px;

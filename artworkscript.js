@@ -1,5 +1,9 @@
 let currentSlides = null;
 let bundles = document.getElementsByClassName("bundle-of-img");
+
+let slideIndicator = document.getElementById("dots-wrapper");
+let dots = null;
+
 let bundle = null; // the bundle chosen //
 
 if (bundles != null) {
@@ -53,6 +57,7 @@ function PopUpImage() {
             targetBundle = this.parentNode;
             caption = targetBundle.nextElementSibling.nextElementSibling.innerHTML;
         }
+
         // Check index of this bundle //
         for (let i = 0; i < bundles.length; i++) {
             if (bundles[i] == targetBundle) {
@@ -84,6 +89,19 @@ function PopUpImage() {
         // Fill caption //
         let popupCaption = document.querySelector("#popup-caption");
         popupCaption.innerHTML = caption;
+
+        slideIndicator.style.display = "flex";
+        for (let i = 0; i < bundle.length; i++) {
+            slideIndicator.innerHTML += "<span class='dot'></span>"
+        }
+
+        dots = document.getElementsByClassName("dot");
+
+        // Set suitable width for dots wrapper //
+        slideIndicator.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
+
+        // Highlight current slide //
+        dots[slider.currentSlide].style.backgroundColor = "white";
 
         sliderWrap.addEventListener("touchstart", ReadFirstTouch);
         sliderWrap.addEventListener("touchmove", ReadTouchMove);
@@ -118,6 +136,9 @@ function ReadTouchMove(event) {
 function ReadTouchEnd() {
     let moveDistance = Math.abs(slider.moveVector);
     if (moveDistance > (document.getElementById("popup-content").offsetWidth / 6) || !slider.longTouch) {
+        // Turn off old slide //
+        dots[slider.currentSlide].style.backgroundColor = "unset";
+
         if (slider.moveVector > 0 && slider.currentSlide < bundle.length - 1) {
             slider.currentSlide++;
         }
@@ -132,6 +153,9 @@ function ReadTouchEnd() {
 
      // Scroll to the current slide //
     document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-content").offsetWidth, 0);
+
+     // Highlight current slide //
+    dots[slider.currentSlide].style.backgroundColor = "white";
 }
 
 function CenterPopUp() {
@@ -144,6 +168,8 @@ function CloseImage(event) {
     if (event.target.id === "close-button" || event.target.id === "popup") {
         // Clear the popup //
         document.getElementById("popup-img").innerHTML = "";
+        slideIndicator.innerHTML = "";
+        slideIndicator.style.display = "none";
         document.querySelector("#popup").style.display = "none";
     }
 }
