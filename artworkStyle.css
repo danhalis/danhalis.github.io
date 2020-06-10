@@ -136,7 +136,9 @@ main {
 }
 
 #page-heading h1 {
-    width: fit-content;
+    width: intrinsic; /* for Safari */
+    width: -moz-max-content; /* for Firefox */
+    width: fit-content; /* for Chrome */
     font-size: 26px;
     margin: 0 auto;
     text-align: center;
@@ -204,7 +206,9 @@ article {
 
 h2 {
     font-family: 'Euphoria Script', cursive;
-    width: fit-content;
+    width: intrinsic; /* for Safari */
+    width: -moz-max-content; /* for Firefox */
+    width: fit-content; /* for Chrome */
     font-size: 20px;
     color: rgb(27, 27, 31);
     font-weight: 600;
