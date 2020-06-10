@@ -60,6 +60,7 @@ function ReadFirstTouch(event) {
 }
 
 function ReadTouchMove(event) {
+    // Disable momentum while scrolling //
     event.preventDefault();
 
     // Get X position of current touch on screen //
@@ -95,6 +96,7 @@ function CloseImage(event) {
     if (event.target.id === "close-button" || event.target.id === "popup") {
         document.getElementById("popup-img").innerHTML = "";
         document.querySelector("#popup").style.display = "none";
+        slider.currentSlide = 0;
     }
 }
 
