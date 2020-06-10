@@ -26,7 +26,7 @@ function PopUpImage() {
     document.querySelector("#popup").style.display = "flex";
 
     // if this is just a single image
-    if (this.parentNode.className != "bundle-of-img" && this.previousElementSibling.className != "bundle-of-img") {
+    if (this.parentNode.className != "bundle-of-img" && this.className.baseVal != "stack-icon") {
         // Update the source //
         document.getElementById("popup-img").innerHTML += "<img>";
         let imgToDisplay = document.querySelector("#popup-img img");
