@@ -257,6 +257,8 @@ video {
 }
 
 .bundle-of-img {
+    grid-column: 1;
+    grid-row: 1;
     background-color: black;
     display: flex;
     align-items: center;
@@ -268,6 +270,24 @@ video {
 
 .bundle-of-img :nth-child(1) {
     display: flex;
+}
+
+.stack-icon {
+    width: 15%;
+    grid-column: 1;
+    grid-row: 1;
+    transform: rotate(270deg);
+    justify-self: end;
+    margin-top: 5%;
+    margin-right: 5%;
+}
+
+figcaption {
+    display: none;
+}
+
+.main-p {
+    text-align: justify;
 }
 
 #popup {
@@ -333,12 +353,9 @@ video {
     padding-right: 3px;
 }
 
-figcaption {
-    display: none;
-}
-
-.main-p {
-    text-align: justify;
+.bundle-wrapper {
+    display: grid;
+    grid-template-columns: 1;
 }
 
 #close-button {

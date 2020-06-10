@@ -10,6 +10,7 @@ if (bundles != null) {
 }
 
 let images = document.getElementsByClassName("img-to-display");
+let stackIcons = document.getElementsByClassName("stack-icon");
 
 // global info about slider //
 let slider = {
@@ -25,7 +26,7 @@ function PopUpImage() {
     document.querySelector("#popup").style.display = "flex";
 
     // if this is just a single image
-    if (this.parentNode.className != "bundle-of-img") {
+    if (this.parentNode.className != "bundle-of-img" && this.previousElementSibling.className != "bundle-of-img") {
         // Update the source //
         document.getElementById("popup-img").innerHTML += "<img>";
         let imgToDisplay = document.querySelector("#popup-img img");
@@ -42,9 +43,19 @@ function PopUpImage() {
 
     // if this is a bundle of images //
     else {
+        let targetBundle = null;
+        let caption = null;
+        if (this.className.baseVal === "stack-icon") {
+            targetBundle = this.previousElementSibling;
+            caption = this.nextElementSibling.innerHTML;
+        }
+        else {
+            targetBundle = this.parentNode;
+            caption = targetBundle.nextElementSibling.nextElementSibling.innerHTML;
+        }
         // Check index of this bundle //
         for (let i = 0; i < bundles.length; i++) {
-            if (bundles[i] == this.parentNode) {
+            if (bundles[i] == targetBundle) {
                 slider.bundleIndex = i;
             }
         }
@@ -53,7 +64,7 @@ function PopUpImage() {
         slider.currentSlide = currentSlides[slider.bundleIndex];
 
         // Get its children images //
-        bundle = this.parentNode.children;
+        bundle = targetBundle.children;
 
         // Fill the slider with those images //
         let sliderWrap = document.getElementById("popup-img");
@@ -72,7 +83,7 @@ function PopUpImage() {
 
         // Fill caption //
         let popupCaption = document.querySelector("#popup-caption");
-        popupCaption.innerHTML = this.parentNode.nextElementSibling.innerHTML;
+        popupCaption.innerHTML = caption;
 
         sliderWrap.addEventListener("touchstart", ReadFirstTouch);
         sliderWrap.addEventListener("touchmove", ReadTouchMove);
@@ -139,6 +150,10 @@ function CloseImage(event) {
 
 for (const img of images) {
     img.addEventListener("click", PopUpImage);
+}
+
+for (const icon of stackIcons) {
+    icon.addEventListener("click", PopUpImage);
 }
 
 document.querySelector("#popup").addEventListener("click", CloseImage);
