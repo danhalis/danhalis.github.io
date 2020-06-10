@@ -90,10 +90,10 @@ function CenterPopUp() {
 }
 
 function CloseImage(event) {
-    document.getElementById("popup-img").innerHTML = "";
-
-    if (event.target.id === "close-button" || event.target.id === "popup")
-    document.querySelector("#popup").style.display = "none";
+    if (event.target.id === "close-button" || event.target.id === "popup") {
+        document.getElementById("popup-img").innerHTML = "";
+        document.querySelector("#popup").style.display = "none";
+    }
 }
 
 for (const img of images) {
