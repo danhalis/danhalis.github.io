@@ -316,14 +316,6 @@ video {
     scroll-behavior: smooth;
 }
 
-/* #img-holder {
-    width: 100%;
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-} */
-
 #popup-img img {
     min-width: 100%;
 }
@@ -338,10 +330,15 @@ video {
     color: white;
     overflow: auto;
     max-height: 130px;
+    padding-right: 3px;
 }
 
 figcaption {
     display: none;
+}
+
+.main-p {
+    text-align: justify;
 }
 
 #close-button {

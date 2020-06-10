@@ -21,11 +21,11 @@ let slider = {
     longTouch: null
 }
 
-function PopUpImage(event) {
+function PopUpImage() {
     document.querySelector("#popup").style.display = "flex";
 
     // if this is just a single image
-    if (event.currentTarget.parentNode.className != "bundle-of-img") {
+    if (this.parentNode.className != "bundle-of-img") {
         // Update the source //
         document.getElementById("popup-img").innerHTML += "<img>";
         let imgToDisplay = document.querySelector("#popup-img img");
@@ -44,7 +44,7 @@ function PopUpImage(event) {
     else {
         // Check index of this bundle //
         for (let i = 0; i < bundles.length; i++) {
-            if (bundles[i] == event.currentTarget.parentNode) {
+            if (bundles[i] == this.parentNode) {
                 slider.bundleIndex = i;
             }
         }
@@ -53,7 +53,7 @@ function PopUpImage(event) {
         slider.currentSlide = currentSlides[slider.bundleIndex];
 
         // Get its children images //
-        bundle = event.currentTarget.parentNode.children;
+        bundle = this.parentNode.children;
 
         // Fill the slider with those images //
         let sliderWrap = document.getElementById("popup-img");
@@ -69,6 +69,10 @@ function PopUpImage(event) {
             // Scroll to the current slide //
             document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-content").offsetWidth, 0);
         });
+
+        // Fill caption //
+        let popupCaption = document.querySelector("#popup-caption");
+        popupCaption.innerHTML = this.parentNode.nextElementSibling.innerHTML;
 
         sliderWrap.addEventListener("touchstart", ReadFirstTouch);
         sliderWrap.addEventListener("touchmove", ReadTouchMove);
