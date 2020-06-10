@@ -21,6 +21,11 @@ a {
     color: white;
 }
 
+
+button {
+    outline: none;
+}
+
 #nav-and-dropdown {
     position: sticky;
     top: 0;
