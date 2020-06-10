@@ -1,7 +1,7 @@
 let currentSlides = null;
 let bundles = document.getElementsByClassName("bundle-of-img");
 
-let slideIndicator = document.getElementById("dots-wrapper");
+let dotsWrapper = document.getElementById("dots-wrapper");
 let dots = null;
 
 let bundle = null; // the bundle chosen //
@@ -90,15 +90,15 @@ function PopUpImage() {
         let popupCaption = document.querySelector("#popup-caption");
         popupCaption.innerHTML = caption;
 
-        slideIndicator.style.display = "flex";
+        dotsWrapper.style.display = "flex";
         for (let i = 0; i < bundle.length; i++) {
-            slideIndicator.innerHTML += "<span class='dot'></span>"
+            dotsWrapper.innerHTML += "<span class='dot'></span>"
         }
 
         dots = document.getElementsByClassName("dot");
 
         // Set suitable width for dots wrapper //
-        slideIndicator.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
+        dotsWrapper.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
 
         // Highlight current slide //
         dots[slider.currentSlide].style.backgroundColor = "white";
@@ -168,8 +168,8 @@ function CloseImage(event) {
     if (event.target.id === "close-button" || event.target.id === "popup") {
         // Clear the popup //
         document.getElementById("popup-img").innerHTML = "";
-        slideIndicator.innerHTML = "";
-        slideIndicator.style.display = "none";
+        dotsWrapper.innerHTML = "";
+        dotsWrapper.style.display = "none";
         document.querySelector("#popup").style.display = "none";
     }
 }
