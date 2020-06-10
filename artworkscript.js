@@ -60,6 +60,8 @@ function ReadFirstTouch(event) {
 }
 
 function ReadTouchMove(event) {
+    event.preventDefault();
+
     // Get X position of current touch on screen //
     slider.currentTouchX = event.touches[0].clientX;
 
