@@ -1,4 +1,13 @@
-// localStorage.clear();
+let currentSlides = null;
+let bundles = document.getElementsByClassName("bundle-of-img");
+
+if (bundles != null) {
+    currentSlides = [0];
+    Array.prototype.slice.call(bundles);
+    for (let i = 0; i < bundles.length - 1; i++) {
+        currentSlides.push(0);
+    }    
+}
 
 let images = document.getElementsByClassName("img-to-display");
 
@@ -21,6 +30,14 @@ function PopUpImage(event) {
         popupCaption.innerHTML = this.nextElementSibling.innerHTML;
     }
     else {
+        let index = null;
+        for (let i = 0; i < bundles.length; i++) {
+            if (bundles[i] == event.currentTarget.parentNode) {
+                index = i;
+            }
+        }
+
+        slider.currentSlide = currentSlides[index];
         bundle = event.currentTarget.parentNode.children;
 
         let sliderWrap = document.getElementById("popup-img");
@@ -56,7 +73,6 @@ function ReadFirstTouch(event) {
 
     // Get X position of first touch //
     slider.firstTouchX = event.touches[0].clientX;
-    console.log(slider.firstTouchX);
 }
 
 function ReadTouchMove(event) {

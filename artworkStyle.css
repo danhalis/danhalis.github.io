@@ -313,6 +313,10 @@ video {
     scroll-behavior: smooth;
 }
 
+#popup-img img {
+    min-width: 100%;
+}
+
 #caption-block {
     display: flex;
     padding: 10px 25px 30px 15px;
