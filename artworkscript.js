@@ -1,3 +1,5 @@
+let tabletScreen = window.matchMedia("(min-width: 768px").matches;
+
 let currentSlides = null;
 let bundles = document.getElementsByClassName("bundle-of-img");
 
@@ -40,6 +42,12 @@ function PopUpImage() {
         // When the image is loaded ...
         imgToDisplay.addEventListener("load", CenterPopUp);
 
+        // if device is a tablet //
+        if (tabletScreen) {
+            // set height for caption to fit with the image //
+            imgToDisplay.addEventListener("load", SetCaptionHeight);
+        }
+
         // Fill caption //
         let popupCaption = document.querySelector("#popup-caption");
         popupCaption.innerHTML = this.nextElementSibling.innerHTML;
@@ -80,17 +88,23 @@ function PopUpImage() {
         // When the first image is loaded ...
         sliderWrap.children[0].addEventListener("load", CenterPopUp);
 
+        // if device is a tablet //
+        if (tabletScreen) {
+            // set height for caption to fit with the image //
+            sliderWrap.children[0].addEventListener("load", SetCaptionHeight);
+        }
+
         // When all images are loaded ...
         sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
             // Scroll to the current slide //
-            document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-content").offsetWidth, 0);
+            document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-img").offsetWidth, 0);
         });
 
         // Fill caption //
         let popupCaption = document.querySelector("#popup-caption");
         popupCaption.innerHTML = caption;
 
-        dotsWrapper.style.display = "flex";
+        document.getElementById("slide-indicator").style.display = "flex";
         for (let i = 0; i < bundle.length; i++) {
             dotsWrapper.innerHTML += "<span class='dot'></span>"
         }
@@ -107,6 +121,12 @@ function PopUpImage() {
         sliderWrap.addEventListener("touchmove", ReadTouchMove);
         sliderWrap.addEventListener("touchend", ReadTouchEnd);
     }
+}
+
+function SetCaptionHeight() {
+    let captionBlock = document.getElementById("caption-block");
+    let popupCaption = document.getElementById("popup-caption");
+    popupCaption.style.maxHeight = (document.getElementById("popup-img").offsetHeight + document.getElementById("slide-indicator").offsetHeight - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-top')) - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-bottom'))) + "px";
 }
 
 function ReadFirstTouch(event) {
@@ -135,7 +155,7 @@ function ReadTouchMove(event) {
 
 function ReadTouchEnd() {
     let moveDistance = Math.abs(slider.moveVector);
-    if (moveDistance > (document.getElementById("popup-content").offsetWidth / 6) || !slider.longTouch) {
+    if (moveDistance > (document.getElementById("popup-img").offsetWidth / 6) || !slider.longTouch) {
         // Turn off old slide //
         dots[slider.currentSlide].style.backgroundColor = "unset";
 
@@ -152,7 +172,7 @@ function ReadTouchEnd() {
     }
 
      // Scroll to the current slide //
-    document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-content").offsetWidth, 0);
+    document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-img").offsetWidth, 0);
 
      // Highlight current slide //
     dots[slider.currentSlide].style.backgroundColor = "white";
@@ -169,7 +189,7 @@ function CloseImage(event) {
         // Clear the popup //
         document.getElementById("popup-img").innerHTML = "";
         dotsWrapper.innerHTML = "";
-        dotsWrapper.style.display = "none";
+        document.getElementById("slide-indicator").style.display = "none";
         document.querySelector("#popup").style.display = "none";
     }
 }
