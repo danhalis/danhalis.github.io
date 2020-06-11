@@ -486,18 +486,28 @@ footer h3 {
 
     #img-and-slide-indicator {
         width: 60%;
+        border-right: rgba(0, 0, 0, 0.027) solid 7px;
+    }
+
+    #popup-img {
+        border-right: rgba(151, 151, 151, 0.438) solid 15px;
     }
 
     #slide-indicator {
-        /* display: none; */
-        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-right: rgba(151, 151, 151, 0.438) solid 15px;
+    }
+
+    .dot {
+        width: 13px;
+        height: 13px;
     }
 
     #caption-block {
         width: 40%;
         padding-top: 30px;
         padding-left: 20px;
-        border-left: rgba(196, 196, 196, 0.473) solid 5px;
+        border-left: rgba(151, 151, 151, 0.438) solid 7px;
     }
 
     #author-avatar {

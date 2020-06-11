@@ -97,7 +97,7 @@ function PopUpImage() {
         // When all images are loaded ...
         sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
             // Scroll to the current slide //
-            document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-img").offsetWidth, 0);
+            ScrollImage();
         });
 
         // Fill caption //
@@ -123,11 +123,24 @@ function PopUpImage() {
     }
 }
 
+function CenterPopUp() {
+    // Setting the popup content in the middle of the screen //
+    let paddingTop = ((window.innerHeight - 50 - document.getElementById("popup-content").offsetHeight) / 2) + "px";
+    document.querySelector("#popup").style.paddingTop = paddingTop;
+}
+
 function SetCaptionHeight() {
     let captionBlock = document.getElementById("caption-block");
     let popupCaption = document.getElementById("popup-caption");
     popupCaption.style.maxHeight = (document.getElementById("popup-img").offsetHeight + document.getElementById("slide-indicator").offsetHeight - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-top')) - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-bottom'))) + "px";
 }
+
+function ScrollImage() {
+    let popupImage = document.getElementById("popup-img");
+    let extraBorderWidth = parseFloat(window.getComputedStyle(popupImage, null).getPropertyValue('border-right-width'));
+    popupImage.scrollTo(slider.currentSlide * (popupImage.offsetWidth - extraBorderWidth), 0);
+}
+
 
 function ReadFirstTouch(event) {
     // Test for flick //
@@ -171,17 +184,11 @@ function ReadTouchEnd() {
         currentSlides[slider.bundleIndex] = slider.currentSlide;
     }
 
-     // Scroll to the current slide //
-    document.getElementById("popup-img").scrollTo(slider.currentSlide * document.getElementById("popup-img").offsetWidth, 0);
+    // Scroll to the current slide //
+    ScrollImage();
 
-     // Highlight current slide //
+    // Highlight current slide //
     dots[slider.currentSlide].style.backgroundColor = "white";
-}
-
-function CenterPopUp() {
-    // Setting the popup content in the middle of the screen //
-    let paddingTop = ((window.innerHeight - 50 - document.getElementById("popup-content").offsetHeight) / 2) + "px";
-    document.querySelector("#popup").style.paddingTop = paddingTop;
 }
 
 function CloseImage(event) {
