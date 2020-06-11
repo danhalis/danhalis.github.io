@@ -486,16 +486,10 @@ footer h3 {
 
     #img-and-slide-indicator {
         width: 60%;
-        border-right: rgba(0, 0, 0, 0.027) solid 7px;
-    }
-
-    #popup-img {
-        border-right: rgba(151, 151, 151, 0.438) solid 15px;
     }
 
     #slide-indicator {
         padding-bottom: 10px;
-        border-right: rgba(151, 151, 151, 0.438) solid 15px;
     }
 
     .dot {
@@ -503,11 +497,51 @@ footer h3 {
         height: 13px;
     }
 
-    #caption-block {
+    #for-borders {
+        background-color: rgba(34, 34, 34, 0.658);
+        display: grid;
+        grid-template-columns: 20px auto;
+        grid-template-rows: 20px auto 20px;
+        gap: 15px 17px;
         width: 40%;
+    }
+
+    #top-left-corner {
+        background-color: rgba(156, 156, 156, 0.281);
+    }
+
+    #top {
+        background-image: linear-gradient(to right, rgba(156, 156, 156, 0.281), rgba(54, 54, 54, 0.575));
+    }
+
+    #left-side {
+        background-color: rgba(156, 156, 156, 0.281);
+    }
+
+    #caption-block {
+        background-image: linear-gradient(to right, rgba(156, 156, 156, 0.281), rgba(54, 54, 54, 0.575));
         padding-top: 30px;
         padding-left: 20px;
-        border-left: rgba(151, 151, 151, 0.438) solid 7px;
+    }
+
+    #popup-caption {
+        margin-right: 7px;
+    }
+
+    #close-button {
+        padding: 0 10px;
+    }
+
+    #bottom-left-corner {
+        background-color: rgba(156, 156, 156, 0.281);
+    }
+
+    #bottom {
+        background-image: linear-gradient(to right, rgba(156, 156, 156, 0.281), rgba(54, 54, 54, 0.575));
+    }
+
+    main {
+
     }
 
     #author-avatar {
@@ -548,7 +582,7 @@ footer h3 {
 
     #inline-menu li {
         display: flex;
-        padding: 5px;
+        padding: 0 5px;
         font-weight: 600;
         font-size: 18px;
         justify-content: center;
@@ -562,9 +596,13 @@ footer h3 {
     #inline-menu li a:hover {
         color: rgb(216, 216, 216);
     }
+
+    #popup-content {
+        width: 75%;
+    }
     
     #caption-block {
-        padding: 35px 20px;
+        padding: 35px 25px;
     }
 
     #popup-caption {

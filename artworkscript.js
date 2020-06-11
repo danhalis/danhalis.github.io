@@ -125,14 +125,22 @@ function PopUpImage() {
 
 function CenterPopUp() {
     // Setting the popup content in the middle of the screen //
-    let paddingTop = ((window.innerHeight - 50 - document.getElementById("popup-content").offsetHeight) / 2) + "px";
+    let navBar = document.getElementsByTagName("nav")[0];
+    let paddingTop = ((window.innerHeight - navBar.offsetHeight - document.getElementById("popup-content").offsetHeight) / 2) + "px";
     document.querySelector("#popup").style.paddingTop = paddingTop;
 }
 
 function SetCaptionHeight() {
+    let forBorders = document.getElementById("for-borders");
     let captionBlock = document.getElementById("caption-block");
     let popupCaption = document.getElementById("popup-caption");
-    popupCaption.style.maxHeight = (document.getElementById("popup-img").offsetHeight + document.getElementById("slide-indicator").offsetHeight - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-top')) - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-bottom'))) + "px";
+    let top = document.getElementById("top"); 
+    popupCaption.style.maxHeight = (document.getElementById("popup-img").offsetHeight 
+                                    + document.getElementById("slide-indicator").offsetHeight 
+                                    - 2 * parseFloat(window.getComputedStyle(forBorders, null).getPropertyValue('row-gap')) 
+                                    - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-top')) 
+                                    - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-bottom')) 
+                                    - 2 * top.offsetHeight) + "px";
 }
 
 function ScrollImage() {
