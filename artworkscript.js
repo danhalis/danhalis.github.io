@@ -18,6 +18,9 @@ if (bundles != null) {
 let images = document.getElementsByClassName("img-to-display");
 let stackIcons = document.getElementsByClassName("stack-icon");
 
+let navBar = document.getElementsByTagName("nav")[0];
+let popup = document.getElementById("popup");
+
 // global info about slider //
 let slider = {
     bundleIndex: null,
@@ -29,7 +32,10 @@ let slider = {
 }
 
 function PopUpImage() {
-    document.querySelector("#popup").style.display = "flex";
+    popup.style.display = "flex";
+
+    // Relocate popup section (navBar becomes bigger on tablet or > ) //
+    popup.style.top = navBar.offsetHeight + "px";
 
     // if this is just a single image
     if (this.parentNode.className != "bundle-of-img" && this.className.baseVal != "stack-icon") {
@@ -57,10 +63,12 @@ function PopUpImage() {
     else {
         let targetBundle = null;
         let caption = null;
+        // if stack icon is clicked //
         if (this.className.baseVal === "stack-icon") {
             targetBundle = this.previousElementSibling;
             caption = this.nextElementSibling.innerHTML;
         }
+        // if image is clicked //
         else {
             targetBundle = this.parentNode;
             caption = targetBundle.nextElementSibling.nextElementSibling.innerHTML;
@@ -127,7 +135,7 @@ function CenterPopUp() {
     // Setting the popup content in the middle of the screen //
     let navBar = document.getElementsByTagName("nav")[0];
     let paddingTop = ((window.innerHeight - navBar.offsetHeight - document.getElementById("popup-content").offsetHeight) / 2) + "px";
-    document.querySelector("#popup").style.paddingTop = paddingTop;
+    popup.style.paddingTop = paddingTop;
 }
 
 function SetCaptionHeight() {
@@ -212,7 +220,7 @@ function CloseImage(event) {
         document.getElementById("popup-img").innerHTML = "";
         dotsWrapper.innerHTML = "";
         document.getElementById("slide-indicator").style.display = "none";
-        document.querySelector("#popup").style.display = "none";
+        popup.style.display = "none";
     }
 }
 
@@ -224,4 +232,4 @@ for (const icon of stackIcons) {
     icon.addEventListener("click", PopUpImage);
 }
 
-document.querySelector("#popup").addEventListener("click", CloseImage);
+popup.addEventListener("click", CloseImage);
