@@ -135,12 +135,19 @@ function SetCaptionHeight() {
     let captionBlock = document.getElementById("caption-block");
     let popupCaption = document.getElementById("popup-caption");
     let top = document.getElementById("top"); 
+    let bottom = document.getElementById("bottom");
+    let captionHeight = null;
+    for (const paragraph of popupCaption.children) {
+        captionHeight += paragraph.offsetHeight;
+    }
+    popupCaption.style.height = captionHeight + 25 + "px";
     popupCaption.style.maxHeight = (document.getElementById("popup-img").offsetHeight 
                                     + document.getElementById("slide-indicator").offsetHeight 
                                     - 2 * parseFloat(window.getComputedStyle(forBorders, null).getPropertyValue('row-gap')) 
                                     - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-top')) 
                                     - parseFloat(window.getComputedStyle(captionBlock, null).getPropertyValue('padding-bottom')) 
-                                    - 2 * top.offsetHeight) + "px";
+                                    - top.offsetHeight
+                                    - bottom.offsetHeight) + "px";
 }
 
 function ScrollImage() {
