@@ -145,12 +145,12 @@ main p {
     overflow: hidden;
 }
 
-#profile-info p {
-    text-align: justify;
+h2 {
+    margin-bottom: 7px; 
 }
 
-h2 {
-    margin-bottom: 5px; 
+#profile-info p {
+    text-align: justify;
 }
 
 span:not(#first-p) {
