@@ -137,7 +137,7 @@ main p {
 }
 
 #profile-info {
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 5px;
     height: 160px;
     display: flex;
@@ -145,11 +145,15 @@ main p {
     overflow: hidden;
 }
 
+#profile-info p {
+    text-align: justify;
+}
+
 h2 {
     margin-bottom: 5px; 
 }
 
-span {
+span:not(#first-p) {
     font-weight: 620;
 }
 
@@ -159,7 +163,7 @@ span {
     color: rgb(103, 103, 114);
     background: none;
     width: fit-content;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 #see-less-button {
@@ -168,7 +172,7 @@ span {
     color: rgb(103, 103, 114);
     background: none;
     width: fit-content;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 #skills-section {
