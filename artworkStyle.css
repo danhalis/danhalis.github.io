@@ -530,6 +530,7 @@ footer h3 {
 
     #close-button {
         padding: 0 10px;
+        cursor: pointer;
     }
 
     #bottom-left-corner {
