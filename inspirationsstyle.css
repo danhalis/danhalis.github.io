@@ -115,6 +115,11 @@ nav {
     display: none;
 }
 
+main {
+    margin: 0 auto;
+    width: 100%;
+}
+
 main p {
     line-height: 1.5em;
 }
@@ -441,6 +446,10 @@ footer h3 {
 
     #inline-menu li a:hover {
         color: rgb(216, 216, 216);
+    }
+
+    main {
+        width: 80%;
     }
 
     main p {

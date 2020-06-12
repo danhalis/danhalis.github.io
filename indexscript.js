@@ -1,3 +1,6 @@
+// General rules for all pages //
+document.body.style.maxWidth = window.innerWidth + "px";
+
 $(document).ready(function()
 {
     let timesClicked = 0;
