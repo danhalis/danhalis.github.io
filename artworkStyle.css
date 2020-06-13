@@ -169,6 +169,7 @@ nav {
 }
 
 .img-navigator {
+    display: none;
     background-color: white;
     border-radius: 50%;
     cursor: pointer;

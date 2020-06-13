@@ -6,7 +6,7 @@ let bundles = document.getElementsByClassName("bundle-of-img");
 let dotsWrapper = document.getElementById("dots-wrapper");
 let dots = null;
 
-let bundle = null; // the bundle chosen //
+let bundle = null; // the bundle of images chosen //
 
 if (bundles != null) {
     currentSlides = [0];
@@ -23,7 +23,7 @@ let popup = document.getElementById("popup");
 
 let prevButton = document.getElementById("to-left");
 let nextButton = document.getElementById("to-right");
-let navigatorButtonWidth = null;  
+let navigatorButtonWidth = null;
 prevButton.addEventListener("click", PrevButton);
 nextButton.addEventListener("click", NextButton);
 
@@ -167,21 +167,10 @@ function PopUpImage() {
             prevButton.style.display = "none";
             nextButton.style.display = "none";
 
-            document.getElementById("popup-img-and-buttons").addEventListener("mouseover", function() {
-                prevButton.style.display = "flex";
-                nextButton.style.display = "flex";
-            });
-            document.getElementById("popup-img-and-buttons").addEventListener("mouseout", function() {
-                prevButton.style.display = "none";
-                nextButton.style.display = "none";
-            });
+            document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
+            document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
         }
     }
-}
-
-function CenterNavigatorButtons() {
-    prevButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
-    nextButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
 }
 
 function CenterPopUp() {
@@ -275,6 +264,21 @@ function ReadTouchEnd() {
     }
 }
 
+function CenterNavigatorButtons() {
+    prevButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
+    nextButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
+}
+
+function DisplayNavigator() {
+    prevButton.style.display = "flex";
+    nextButton.style.display = "flex";
+}
+
+function HideNavigator() {
+    prevButton.style.display = "none";
+    nextButton.style.display = "none";
+}
+
 function PrevButton() {
     if (slider.currentSlide > 0) {
         // Turn off old slide //
@@ -303,10 +307,10 @@ function NextButton() {
 
 function CloseImage(event) {
     if (event.target.id === "close-button" || event.target.id === "popup") {
-        // Clear the popup //
+        // Reset everything //
         if (!touchScreen) {
-            prevButton.style.display = "none";
-            nextButton.style.display = "none";
+            document.getElementById("popup-img-and-buttons").removeEventListener("mouseover", DisplayNavigator);
+            document.getElementById("popup-img-and-buttons").removeEventListener("mouseout", HideNavigator);
         }
         document.getElementById("popup-img").innerHTML = "";
         dotsWrapper.innerHTML = "";
