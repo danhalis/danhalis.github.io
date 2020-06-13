@@ -24,8 +24,6 @@ let popup = document.getElementById("popup");
 let prevButton = document.getElementById("to-left");
 let nextButton = document.getElementById("to-right");
 let navigatorButtonSize = null;
-prevButton.addEventListener("click", PrevButton);
-nextButton.addEventListener("click", NextButton);
 
 // global info about slider //
 let slider = {
@@ -157,6 +155,7 @@ function PopUpImage() {
             // When the first image is loaded ...
             sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
 
+            DisplayNavigator();
             document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
             document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
         }
@@ -334,6 +333,12 @@ for (const img of images) {
 
 for (const icon of stackIcons) {
     icon.addEventListener("click", PopUpImage);
+}
+
+if (!touchScreen) {
+    let navigatorArea = document.getElementsByClassName("navigator-area");
+    navigatorArea[0].addEventListener("click", PrevButton);
+    navigatorArea[1].addEventListener("click", NextButton);
 }
 
 popup.addEventListener("click", CloseImage);

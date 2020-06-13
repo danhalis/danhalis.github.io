@@ -168,11 +168,26 @@ nav {
     scroll-behavior: smooth;
 }
 
+.navigator-area {
+    width: 50%;
+    height: 100%;
+}
+
+.navigator-area:nth-child(1) {
+    position: absolute;
+    left: 0;
+}
+
+.navigator-area:nth-child(2) {
+    position: absolute;
+    right: 0;
+}
+
 .img-navigator {
     display: none;
-    font-size: 20px;
-    text-align: center;
-    background-color: white;
+    font-size: 30px;
+    color: rgb(240, 240, 240);
+    background-color: rgba(95, 95, 95, 0.329);
     border-radius: 50%;
     cursor: pointer;
 }
