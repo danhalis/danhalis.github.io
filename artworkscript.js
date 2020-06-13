@@ -44,6 +44,7 @@ function isTouchDevice() {
 
 function PopUpImage() {
     popup.style.display = "flex";
+    popup.style.maxWidth = window.innerWidth + "px";
 
     // Relocate popup section (navBar becomes bigger on tablet or > ) //
     popup.style.top = navBar.offsetHeight + "px";
@@ -146,7 +147,7 @@ function PopUpImage() {
         });
 
         if (isTouchDevice()) {
-            document.body.style.background = "red";
+            
         }
     }
 }
