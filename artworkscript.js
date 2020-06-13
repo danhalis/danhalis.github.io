@@ -214,7 +214,11 @@ function SetCaptionHeight() {
 function ScrollImage() {
     let popupImage = document.getElementById("popup-img");
     let extraBorderWidth = parseFloat(window.getComputedStyle(popupImage, null).getPropertyValue('border-right-width'));
+
     popupImage.scrollTo(slider.currentSlide * (popupImage.offsetWidth - extraBorderWidth), 0);
+    
+    // Highlight current slide //
+    dots[slider.currentSlide].style.backgroundColor = "white";
 }
 
 
@@ -245,42 +249,54 @@ function ReadTouchMove(event) {
 function ReadTouchEnd() {
     let moveDistance = Math.abs(slider.moveVector);
     if (moveDistance > (document.getElementById("popup-img").offsetWidth / 6) || !slider.longTouch) {
-        // Turn off old slide //
-        dots[slider.currentSlide].style.backgroundColor = "unset";
 
         if (slider.moveVector > 0 && slider.currentSlide < bundle.length - 1) {
+            // Turn off old slide //
+            dots[slider.currentSlide].style.backgroundColor = "unset";
+
             slider.currentSlide++;
+            currentSlides[slider.bundleIndex] = slider.currentSlide;
+
+            // Scroll to new current slide //
+            ScrollImage();
         }
         else {
             if (slider.moveVector < 0 && slider.currentSlide > 0) {
+                // Turn off old slide //
+                dots[slider.currentSlide].style.backgroundColor = "unset";
+
                 slider.currentSlide--;
+                currentSlides[slider.bundleIndex] = slider.currentSlide;
+
+                // Scroll to new current slide //
+                ScrollImage();
             }
         }
-
-        currentSlides[slider.bundleIndex] = slider.currentSlide;
     }
-
-    // Scroll to the current slide //
-    ScrollImage();
-
-    // Highlight current slide //
-    dots[slider.currentSlide].style.backgroundColor = "white";
 }
 
 function PrevButton() {
     if (slider.currentSlide > 0) {
+        // Turn off old slide //
+        dots[slider.currentSlide].style.backgroundColor = "unset";
+
         slider.currentSlide--;
         currentSlides[slider.bundleIndex] = slider.currentSlide;
 
+        // Scroll to new curent slide //
         ScrollImage();
     }
 }
 
 function NextButton() {
     if (slider.currentSlide < bundle.length - 1) {
+        // Turn off old slide //
+        dots[slider.currentSlide].style.backgroundColor = "unset";
+
         slider.currentSlide++;
         currentSlides[slider.bundleIndex] = slider.currentSlide;
 
+        // Scroll to new curent slide //
         ScrollImage();
     }
 } 
