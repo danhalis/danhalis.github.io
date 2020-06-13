@@ -21,6 +21,12 @@ let stackIcons = document.getElementsByClassName("stack-icon");
 let navBar = document.getElementsByTagName("nav")[0];
 let popup = document.getElementById("popup");
 
+let prevButton = document.getElementById("to-left");
+let nextButton = document.getElementById("to-right");
+let navigatorButtonWidth = null;  
+prevButton.addEventListener("click", PrevButton);
+nextButton.addEventListener("click", NextButton);
+
 // global info about slider //
 let slider = {
     bundleIndex: null,
@@ -32,15 +38,15 @@ let slider = {
 }
 
 // Test if user's device is a touch screen //
-function isTouchDevice() {  
-    try {  
-      document.createEvent("TouchEvent");
-      return true;  
-    } 
-    catch (e) {  
-      return false; 
-    }  
-}
+let touchScreen = null;
+try {  
+    document.createEvent("TouchEvent");
+    touchScreen = true; 
+} 
+catch (e) {  
+    touchScreen = false; 
+}  
+
 
 function PopUpImage() {
     popup.style.display = "flex";
@@ -146,10 +152,36 @@ function PopUpImage() {
             event.preventDefault();
         });
 
-        if (isTouchDevice()) {
-            
+        if (!touchScreen) {   
+            // Display img navigator buttons //
+            prevButton.style.display = "flex";
+            nextButton.style.display = "flex";
+
+            if (navigatorButtonWidth == null) {
+                navigatorButtonWidth = prevButton.offsetHeight;
+                sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
+                prevButton.style.padding = "0 " + ((navigatorButtonWidth - prevButton.offsetWidth) / 2) + "px";
+                nextButton.style.padding = "0 " + ((navigatorButtonWidth - nextButton.offsetWidth) / 2) + "px";
+            }
+
+            prevButton.style.display = "none";
+            nextButton.style.display = "none";
+
+            document.getElementById("popup-img-and-buttons").addEventListener("mouseover", function() {
+                prevButton.style.display = "flex";
+                nextButton.style.display = "flex";
+            });
+            document.getElementById("popup-img-and-buttons").addEventListener("mouseout", function() {
+                prevButton.style.display = "none";
+                nextButton.style.display = "none";
+            });
         }
     }
+}
+
+function CenterNavigatorButtons() {
+    prevButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
+    nextButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
 }
 
 function CenterPopUp() {
@@ -235,9 +267,31 @@ function ReadTouchEnd() {
     dots[slider.currentSlide].style.backgroundColor = "white";
 }
 
+function PrevButton() {
+    if (slider.currentSlide > 0) {
+        slider.currentSlide--;
+        currentSlides[slider.bundleIndex] = slider.currentSlide;
+
+        ScrollImage();
+    }
+}
+
+function NextButton() {
+    if (slider.currentSlide < bundle.length - 1) {
+        slider.currentSlide++;
+        currentSlides[slider.bundleIndex] = slider.currentSlide;
+
+        ScrollImage();
+    }
+} 
+
 function CloseImage(event) {
     if (event.target.id === "close-button" || event.target.id === "popup") {
         // Clear the popup //
+        if (!touchScreen) {
+            prevButton.style.display = "none";
+            nextButton.style.display = "none";
+        }
         document.getElementById("popup-img").innerHTML = "";
         dotsWrapper.innerHTML = "";
         document.getElementById("slide-indicator").style.display = "none";
