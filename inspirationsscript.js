@@ -1,19 +1,3 @@
-$(document).ready(function()
-{
-    let timesClicked = 0;
-
-    $("#burger-menu-button").click(function()
-    {
-        timesClicked++;
-
-        if (timesClicked%2==0) {
-            $("#dropdown-content").css("display", "none");
-        } else {
-            $("#dropdown-content").css("display", "flex");
-        }
-    });
-});
-
 let screens = [
     screen_1 = { currentIndex: 0 },
     screen_2 = { currentIndex: 0 }
