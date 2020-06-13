@@ -15,7 +15,7 @@ if (bundles != null) {
     }    
 }
 
-let images = document.getElementsByClassName("img-to-display");
+let toolTips = document.getElementsByClassName("tool-tip");
 let stackIcons = document.getElementsByClassName("stack-icon");
 
 let navBar = document.getElementsByTagName("nav")[0];
@@ -46,7 +46,6 @@ catch (e) {
     touchScreen = false; 
 }  
 
-
 function PopUpImage() {
     popup.style.display = "flex";
     popup.style.maxWidth = window.innerWidth + "px";
@@ -55,12 +54,12 @@ function PopUpImage() {
     popup.style.top = navBar.offsetHeight + "px";
 
     // if this is just a single image
-    if (this.parentNode.className != "bundle-of-img" && this.className.baseVal != "stack-icon") {
+    if (this.parentNode.className === "img-wrapper") {
         // Update the source //
         document.getElementById("popup-img").innerHTML += "<img>";
         let imgToDisplay = document.querySelector("#popup-img img");
-        imgToDisplay.src = this.src;
-        imgToDisplay.alt = this.alt;
+        imgToDisplay.src = this.previousElementSibling.previousElementSibling.src;
+        imgToDisplay.alt = this.previousElementSibling.previousElementSibling.alt;
 
         // When the image is loaded ...
         imgToDisplay.addEventListener("load", CenterPopUp);
@@ -73,23 +72,13 @@ function PopUpImage() {
 
         // Fill caption //
         let popupCaption = document.querySelector("#popup-caption");
-        popupCaption.innerHTML = this.nextElementSibling.innerHTML;
+        popupCaption.innerHTML = this.previousElementSibling.innerHTML;
     }
 
     // if this is a bundle of images //
     else {
-        let targetBundle = null;
-        let caption = null;
-        // if stack icon is clicked //
-        if (this.className.baseVal === "stack-icon") {
-            targetBundle = this.previousElementSibling;
-            caption = this.nextElementSibling.innerHTML;
-        }
-        // if image is clicked //
-        else {
-            targetBundle = this.parentNode;
-            caption = targetBundle.nextElementSibling.nextElementSibling.innerHTML;
-        }
+        let targetBundle = this.previousElementSibling.previousElementSibling.previousElementSibling;
+        let caption = this.previousElementSibling.innerHTML;
 
         // Check index of this bundle //
         for (let i = 0; i < bundles.length; i++) {
@@ -329,8 +318,29 @@ function CloseImage(event) {
     }
 }
 
-for (const img of images) {
-    img.addEventListener("click", PopUpImage);
+function DisplayToolTip() {
+    this.children[this.children.length - 1].style.display = "flex";
+}
+
+function HideToolTip() {
+    this.children[this.children.length - 1].style.display = "none";
+}
+
+let imgWrapper = document.getElementsByClassName("img-wrapper");
+for (const wrapper of imgWrapper) {
+    wrapper.addEventListener("mouseover", DisplayToolTip);
+    wrapper.addEventListener("mouseout", HideToolTip);
+}
+
+let bundleWrapper = document.getElementsByClassName("bundle-wrapper");
+for (const wrapper of bundleWrapper) {
+    wrapper.addEventListener("mouseover", DisplayToolTip);
+    wrapper.addEventListener("mouseout", HideToolTip);
+}
+
+for (const toolTip of toolTips) {
+    toolTip.style.display = "none";
+    toolTip.addEventListener("click", PopUpImage);
 }
 
 for (const icon of stackIcons) {

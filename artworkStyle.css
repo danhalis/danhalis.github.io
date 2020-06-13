@@ -392,7 +392,38 @@ video {
     width: 100%;
 }
 
+.img-wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.img-wrapper img {
+    height: 100%;
+}
+
+.tool-tip {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-image: linear-gradient(rgba(83, 83, 83, 0.295), rgba(0, 0, 0, 0.61));
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    cursor: pointer;
+}
+
+.img-title {
+    width: 85%;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
 .bundle-wrapper {
+    position: relative;
     display: grid;
     grid-template-columns: 1;
 }
@@ -486,6 +517,10 @@ footer h3 {
 
     h2 {
         margin-left: 10px;
+    }
+
+    .img-title {
+        font-size: 18px;
     }
 }
 
@@ -652,7 +687,7 @@ footer h3 {
         gap: 27px;
     }
 
-    .gallery img, .gallery video, .bundle-of-img {
+    .gallery img, .gallery video, .bundle-of-img, .tool-tip {
         border-radius: 15px;
     }
 
