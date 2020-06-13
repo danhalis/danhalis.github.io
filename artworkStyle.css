@@ -169,6 +169,7 @@ nav {
 }
 
 .navigator-area {
+    display: none;
     width: 50%;
     height: 100%;
 }
@@ -184,7 +185,7 @@ nav {
 }
 
 .img-navigator {
-    display: none;
+    /* display: none; */
     font-size: 30px;
     color: rgb(240, 240, 240);
     background-color: rgba(95, 95, 95, 0.329);

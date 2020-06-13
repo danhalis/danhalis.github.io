@@ -21,6 +21,7 @@ let stackIcons = document.getElementsByClassName("stack-icon");
 let navBar = document.getElementsByTagName("nav")[0];
 let popup = document.getElementById("popup");
 
+let navigatorArea = document.getElementsByClassName("navigator-area");
 let prevButton = document.getElementById("to-left");
 let nextButton = document.getElementById("to-right");
 let navigatorButtonSize = null;
@@ -155,7 +156,6 @@ function PopUpImage() {
             // When the first image is loaded ...
             sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
 
-            DisplayNavigator();
             document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
             document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
         }
@@ -256,7 +256,7 @@ function ReadTouchEnd() {
 function CenterNavigatorButtons() {
     let sliderWrap = document.getElementById("popup-img");
 
-    // Make the buttons visible to get their height //
+    // Make navigator area visible to get the buttons height //
     DisplayNavigator();
 
     if (navigatorButtonSize == null) {
@@ -264,7 +264,7 @@ function CenterNavigatorButtons() {
     }
 
     if (prevButton.style.padding === "") {
-        // Set width with padding //
+        // Set button width with padding //
         prevButton.style.padding = "0 " + ((navigatorButtonSize - prevButton.offsetWidth) / 2) + "px";
         nextButton.style.padding = "0 " + ((navigatorButtonSize - nextButton.offsetWidth) / 2) + "px";
     }
@@ -273,18 +273,20 @@ function CenterNavigatorButtons() {
     prevButton.style.top = (sliderWrap.offsetHeight / 2) - (navigatorButtonSize / 2) + "px";
     nextButton.style.top = (sliderWrap.offsetHeight / 2) - (navigatorButtonSize / 2) + "px";
 
-    // After all the maths, hide the buttons again //
+    // After all the maths, hide the navigator area again //
     HideNavigator();
 }
 
 function DisplayNavigator() {
-    prevButton.style.display = "flex";
-    nextButton.style.display = "flex";
+    for (const area of navigatorArea) {
+        area.style.display = "flex";
+    }
 }
 
 function HideNavigator() {
-    prevButton.style.display = "none";
-    nextButton.style.display = "none";
+    for (const area of navigatorArea) {
+        area.style.display = "none";
+    }
 }
 
 function PrevButton() {
@@ -336,7 +338,6 @@ for (const icon of stackIcons) {
 }
 
 if (!touchScreen) {
-    let navigatorArea = document.getElementsByClassName("navigator-area");
     navigatorArea[0].addEventListener("click", PrevButton);
     navigatorArea[1].addEventListener("click", NextButton);
 }
