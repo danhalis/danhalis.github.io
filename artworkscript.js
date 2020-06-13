@@ -23,7 +23,7 @@ let popup = document.getElementById("popup");
 
 let prevButton = document.getElementById("to-left");
 let nextButton = document.getElementById("to-right");
-let navigatorButtonWidth = null;
+let navigatorButtonSize = null;
 prevButton.addEventListener("click", PrevButton);
 nextButton.addEventListener("click", NextButton);
 
@@ -152,20 +152,10 @@ function PopUpImage() {
             event.preventDefault();
         });
 
+        // if user's device is not a touch screen //
         if (!touchScreen) {   
-            // Display img navigator buttons //
-            prevButton.style.display = "flex";
-            nextButton.style.display = "flex";
-
-            if (navigatorButtonWidth == null) {
-                navigatorButtonWidth = prevButton.offsetHeight;
-                sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
-                prevButton.style.padding = "0 " + ((navigatorButtonWidth - prevButton.offsetWidth) / 2) + "px";
-                nextButton.style.padding = "0 " + ((navigatorButtonWidth - nextButton.offsetWidth) / 2) + "px";
-            }
-
-            prevButton.style.display = "none";
-            nextButton.style.display = "none";
+            // When the first image is loaded ...
+            sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
 
             document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
             document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
@@ -265,8 +255,27 @@ function ReadTouchEnd() {
 }
 
 function CenterNavigatorButtons() {
-    prevButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
-    nextButton.style.top = (document.getElementById("popup-img").offsetHeight / 2) - (navigatorButtonWidth / 2) + "px";
+    let sliderWrap = document.getElementById("popup-img");
+
+    // Make the buttons visible to get their height //
+    DisplayNavigator();
+
+    if (navigatorButtonSize == null) {
+        navigatorButtonSize = prevButton.offsetHeight;
+    }
+
+    if (prevButton.style.padding === "") {
+        // Set width with padding //
+        prevButton.style.padding = "0 " + ((navigatorButtonSize - prevButton.offsetWidth) / 2) + "px";
+        nextButton.style.padding = "0 " + ((navigatorButtonSize - nextButton.offsetWidth) / 2) + "px";
+    }
+
+    // Center the buttons //
+    prevButton.style.top = (sliderWrap.offsetHeight / 2) - (navigatorButtonSize / 2) + "px";
+    nextButton.style.top = (sliderWrap.offsetHeight / 2) - (navigatorButtonSize / 2) + "px";
+
+    // After all the maths, hide the buttons again //
+    HideNavigator();
 }
 
 function DisplayNavigator() {
