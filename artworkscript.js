@@ -31,6 +31,17 @@ let slider = {
     longTouch: null
 }
 
+// Test if user's device is a touch screen //
+function isTouchDevice() {  
+    try {  
+      document.createEvent("TouchEvent");
+      return true;  
+    } 
+    catch (e) {  
+      return false; 
+    }  
+}
+
 function PopUpImage() {
     popup.style.display = "flex";
 
@@ -128,6 +139,15 @@ function PopUpImage() {
         sliderWrap.addEventListener("touchstart", ReadFirstTouch);
         sliderWrap.addEventListener("touchmove", ReadTouchMove);
         sliderWrap.addEventListener("touchend", ReadTouchEnd);
+
+        // Prevent scrolling on touchpad when on laptop //
+        sliderWrap.addEventListener("mousewheel", function(event){
+            event.preventDefault();
+        });
+
+        if (isTouchDevice()) {
+            document.body.style.background = "red";
+        }
     }
 }
 
