@@ -1,4 +1,5 @@
 let tabletScreen = window.matchMedia("(min-width: 768px").matches;
+let belowLaptopScreen = window.matchMedia("(max-width: 1024px)").matches;
 
 let currentSlides = null;
 let bundles = document.getElementsByClassName("bundle-of-img");
@@ -15,12 +16,13 @@ if (bundles != null) {
     }    
 }
 
-let images = document.getElementsByClassName("img-to-display");
+let toolTips = document.getElementsByClassName("tool-tip");
 let stackIcons = document.getElementsByClassName("stack-icon");
 
 let navBar = document.getElementsByTagName("nav")[0];
 let popup = document.getElementById("popup");
 
+let navigatorArea = document.getElementsByClassName("navigator-area");
 let prevButton = document.getElementById("to-left");
 let nextButton = document.getElementById("to-right");
 let navigatorButtonSize = null;
@@ -45,7 +47,6 @@ catch (e) {
     touchScreen = false; 
 }  
 
-
 function PopUpImage() {
     popup.style.display = "flex";
     popup.style.maxWidth = window.innerWidth + "px";
@@ -54,12 +55,12 @@ function PopUpImage() {
     popup.style.top = navBar.offsetHeight + "px";
 
     // if this is just a single image
-    if (this.parentNode.className != "bundle-of-img" && this.className.baseVal != "stack-icon") {
+    if (this.parentNode.className === "img-wrapper") {
         // Update the source //
         document.getElementById("popup-img").innerHTML += "<img>";
         let imgToDisplay = document.querySelector("#popup-img img");
-        imgToDisplay.src = this.src;
-        imgToDisplay.alt = this.alt;
+        imgToDisplay.src = this.previousElementSibling.previousElementSibling.src;
+        imgToDisplay.alt = this.previousElementSibling.previousElementSibling.alt;
 
         // When the image is loaded ...
         imgToDisplay.addEventListener("load", CenterPopUp);
@@ -72,92 +73,113 @@ function PopUpImage() {
 
         // Fill caption //
         let popupCaption = document.querySelector("#popup-caption");
-        popupCaption.innerHTML = this.nextElementSibling.innerHTML;
+        popupCaption.innerHTML = this.previousElementSibling.innerHTML;
     }
 
-    // if this is a bundle of images //
     else {
-        let targetBundle = null;
-        let caption = null;
-        // if stack icon is clicked //
-        if (this.className.baseVal === "stack-icon") {
-            targetBundle = this.previousElementSibling;
-            caption = this.nextElementSibling.innerHTML;
-        }
-        // if image is clicked //
-        else {
-            targetBundle = this.parentNode;
-            caption = targetBundle.nextElementSibling.nextElementSibling.innerHTML;
-        }
+        // if this is a video //
+        if (this.parentNode.className === "video-wrapper") {
+            // Update the source //
+            document.getElementById("popup-img").innerHTML += "<video controls autoplay><source type='video/mp4'></video>"
+            let videoToDisplay = document.querySelector("#popup-img video source");
+            videoToDisplay.src = this.previousElementSibling.previousElementSibling.previousElementSibling.children[0].children[0].src;
 
-        // Check index of this bundle //
-        for (let i = 0; i < bundles.length; i++) {
-            if (bundles[i] == targetBundle) {
-                slider.bundleIndex = i;
+            // Set video height suitable for viewport //
+            if (belowLaptopScreen) {
+                videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 50 + "px";
             }
+            else {
+
+                videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 80 + "px";
+            }
+
+            // When the video is loaded ...
+            videoToDisplay.parentNode.addEventListener("loadeddata", CenterPopUp);
+
+            // if device is a tablet //
+            if (tabletScreen) {
+                // set height for caption to fit with the image //
+                videoToDisplay.addEventListener("load", SetCaptionHeight);
+            }
+
+            // Fill caption //
+            let popupCaption = document.querySelector("#popup-caption");
+            popupCaption.innerHTML = this.previousElementSibling.innerHTML;
         }
 
-        // Check out its current slide //
-        slider.currentSlide = currentSlides[slider.bundleIndex];
-
-        // Get its children images //
-        bundle = targetBundle.children;
-
-        // Fill the slider with those images //
-        let sliderWrap = document.getElementById("popup-img");
-        for (const img of bundle) {
-            sliderWrap.innerHTML += img.outerHTML;
-        }
-
-        // When the first image is loaded ...
-        sliderWrap.children[0].addEventListener("load", CenterPopUp);
-
-        // if device is a tablet //
-        if (tabletScreen) {
-            // set height for caption to fit with the image //
-            sliderWrap.children[0].addEventListener("load", SetCaptionHeight);
-        }
-
-        // When all images are loaded ...
-        sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
-            // Scroll to the current slide //
-            ScrollImage();
-        });
-
-        // Fill caption //
-        let popupCaption = document.querySelector("#popup-caption");
-        popupCaption.innerHTML = caption;
-
-        document.getElementById("slide-indicator").style.display = "flex";
-        for (let i = 0; i < bundle.length; i++) {
-            dotsWrapper.innerHTML += "<span class='dot'></span>"
-        }
-
-        dots = document.getElementsByClassName("dot");
-
-        // Set suitable width for dots wrapper //
-        dotsWrapper.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
-
-        // Highlight current slide //
-        dots[slider.currentSlide].style.backgroundColor = "white";
-
-        sliderWrap.addEventListener("touchstart", ReadFirstTouch);
-        sliderWrap.addEventListener("touchmove", ReadTouchMove);
-        sliderWrap.addEventListener("touchend", ReadTouchEnd);
-
-        // Prevent scrolling on touchpad when on laptop //
-        sliderWrap.addEventListener("mousewheel", function(event){
-            event.preventDefault();
-        });
-
-        // if user's device is not a touch screen //
-        if (!touchScreen) {   
+        // if this is a bundle of images //
+        else {
+            let targetBundle = this.previousElementSibling.previousElementSibling.previousElementSibling;
+            let caption = this.previousElementSibling.innerHTML;
+    
+            // Check index of this bundle //
+            for (let i = 0; i < bundles.length; i++) {
+                if (bundles[i] == targetBundle) {
+                    slider.bundleIndex = i;
+                }
+            }
+    
+            // Check out its current slide //
+            slider.currentSlide = currentSlides[slider.bundleIndex];
+    
+            // Get its children images //
+            bundle = targetBundle.children;
+    
+            // Fill the slider with those images //
+            let sliderWrap = document.getElementById("popup-img");
+            for (const img of bundle) {
+                sliderWrap.innerHTML += img.outerHTML;
+            }
+    
             // When the first image is loaded ...
-            sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
-
-            DisplayNavigator();
-            document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
-            document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
+            sliderWrap.children[0].addEventListener("load", CenterPopUp);
+    
+            // if device is a tablet //
+            if (tabletScreen) {
+                // set height for caption to fit with the image //
+                sliderWrap.children[0].addEventListener("load", SetCaptionHeight);
+            }
+    
+            // When all images are loaded ...
+            sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
+                // Scroll to the current slide //
+                ScrollImage();
+            });
+    
+            // Fill caption //
+            let popupCaption = document.querySelector("#popup-caption");
+            popupCaption.innerHTML = caption;
+    
+            document.getElementById("slide-indicator").style.display = "flex";
+            for (let i = 0; i < bundle.length; i++) {
+                dotsWrapper.innerHTML += "<span class='dot'></span>"
+            }
+    
+            dots = document.getElementsByClassName("dot");
+    
+            // Set suitable width for dots wrapper //
+            dotsWrapper.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
+    
+            // Highlight current slide //
+            dots[slider.currentSlide].style.backgroundColor = "white";
+    
+            sliderWrap.addEventListener("touchstart", ReadFirstTouch);
+            sliderWrap.addEventListener("touchmove", ReadTouchMove);
+            sliderWrap.addEventListener("touchend", ReadTouchEnd);
+    
+            // Prevent scrolling on touchpad when on laptop //
+            sliderWrap.addEventListener("mousewheel", function(event){
+                event.preventDefault();
+            });
+    
+            // if user's device is not a touch screen //
+            if (!touchScreen) {   
+                // When the first image is loaded ...
+                sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
+    
+                document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
+                document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
+            }
         }
     }
 }
@@ -256,7 +278,7 @@ function ReadTouchEnd() {
 function CenterNavigatorButtons() {
     let sliderWrap = document.getElementById("popup-img");
 
-    // Make the buttons visible to get their height //
+    // Make navigator area visible to get the buttons height //
     DisplayNavigator();
 
     if (navigatorButtonSize == null) {
@@ -264,7 +286,7 @@ function CenterNavigatorButtons() {
     }
 
     if (prevButton.style.padding === "") {
-        // Set width with padding //
+        // Set button width with padding //
         prevButton.style.padding = "0 " + ((navigatorButtonSize - prevButton.offsetWidth) / 2) + "px";
         nextButton.style.padding = "0 " + ((navigatorButtonSize - nextButton.offsetWidth) / 2) + "px";
     }
@@ -273,18 +295,20 @@ function CenterNavigatorButtons() {
     prevButton.style.top = (sliderWrap.offsetHeight / 2) - (navigatorButtonSize / 2) + "px";
     nextButton.style.top = (sliderWrap.offsetHeight / 2) - (navigatorButtonSize / 2) + "px";
 
-    // After all the maths, hide the buttons again //
+    // After all the maths, hide the navigator area again //
     HideNavigator();
 }
 
 function DisplayNavigator() {
-    prevButton.style.display = "flex";
-    nextButton.style.display = "flex";
+    for (const area of navigatorArea) {
+        area.style.display = "flex";
+    }
 }
 
 function HideNavigator() {
-    prevButton.style.display = "none";
-    nextButton.style.display = "none";
+    for (const area of navigatorArea) {
+        area.style.display = "none";
+    }
 }
 
 function PrevButton() {
@@ -327,8 +351,35 @@ function CloseImage(event) {
     }
 }
 
-for (const img of images) {
-    img.addEventListener("click", PopUpImage);
+function DisplayToolTip() {
+    this.children[this.children.length - 1].style.display = "flex";
+}
+
+function HideToolTip() {
+    this.children[this.children.length - 1].style.display = "none";
+}
+
+let imgWrapper = document.getElementsByClassName("img-wrapper");
+for (const wrapper of imgWrapper) {
+    wrapper.addEventListener("mouseover", DisplayToolTip);
+    wrapper.addEventListener("mouseout", HideToolTip);
+}
+
+let bundleWrapper = document.getElementsByClassName("bundle-wrapper");
+for (const wrapper of bundleWrapper) {
+    wrapper.addEventListener("mouseover", DisplayToolTip);
+    wrapper.addEventListener("mouseout", HideToolTip);
+}
+
+let videoWrapper = document.getElementsByClassName("video-wrapper");
+for (const wrapper of videoWrapper) {
+    wrapper.addEventListener("mouseover", DisplayToolTip);
+    wrapper.addEventListener("mouseout", HideToolTip);
+}
+
+for (const toolTip of toolTips) {
+    toolTip.style.display = "none";
+    toolTip.addEventListener("click", PopUpImage);
 }
 
 for (const icon of stackIcons) {
@@ -336,7 +387,6 @@ for (const icon of stackIcons) {
 }
 
 if (!touchScreen) {
-    let navigatorArea = document.getElementsByClassName("navigator-area");
     navigatorArea[0].addEventListener("click", PrevButton);
     navigatorArea[1].addEventListener("click", NextButton);
 }
