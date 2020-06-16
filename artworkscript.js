@@ -89,8 +89,7 @@ function PopUpImage() {
                 videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 50 + "px";
             }
             else {
-
-                videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 80 + "px";
+                videoToDisplay.parentNode.style.height = window.innerHeight / 100 * 85 + "px";
             }
 
             // When the video is loaded ...

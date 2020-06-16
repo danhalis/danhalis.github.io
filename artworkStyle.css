@@ -132,7 +132,7 @@ nav {
 
 #popup-content {
     min-width: 320px;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
