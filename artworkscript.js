@@ -1,4 +1,5 @@
 let tabletScreen = window.matchMedia("(min-width: 768px").matches;
+let belowLaptopScreen = window.matchMedia("(max-width: 1024px)").matches;
 
 let currentSlides = null;
 let bundles = document.getElementsByClassName("bundle-of-img");
@@ -75,78 +76,109 @@ function PopUpImage() {
         popupCaption.innerHTML = this.previousElementSibling.innerHTML;
     }
 
-    // if this is a bundle of images //
     else {
-        let targetBundle = this.previousElementSibling.previousElementSibling.previousElementSibling;
-        let caption = this.previousElementSibling.innerHTML;
+        // if this is a video //
+        if (this.parentNode.className === "video-wrapper") {
+            // Update the source //
+            document.getElementById("popup-img").innerHTML += "<video controls autoplay><source type='video/mp4'></video>"
+            let videoToDisplay = document.querySelector("#popup-img video source");
+            videoToDisplay.src = this.previousElementSibling.previousElementSibling.previousElementSibling.children[0].children[0].src;
 
-        // Check index of this bundle //
-        for (let i = 0; i < bundles.length; i++) {
-            if (bundles[i] == targetBundle) {
-                slider.bundleIndex = i;
+            // Set video height suitable for viewport //
+            if (belowLaptopScreen) {
+                videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 50 + "px";
             }
+            else {
+                videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 80 + "px";
+            }
+
+            // When the video is loaded ...
+            videoToDisplay.parentNode.addEventListener("loadeddata", CenterPopUp);
+
+            // if device is a tablet //
+            if (tabletScreen) {
+                // set height for caption to fit with the image //
+                videoToDisplay.addEventListener("load", SetCaptionHeight);
+            }
+
+            // Fill caption //
+            let popupCaption = document.querySelector("#popup-caption");
+            popupCaption.innerHTML = this.previousElementSibling.innerHTML;
         }
 
-        // Check out its current slide //
-        slider.currentSlide = currentSlides[slider.bundleIndex];
-
-        // Get its children images //
-        bundle = targetBundle.children;
-
-        // Fill the slider with those images //
-        let sliderWrap = document.getElementById("popup-img");
-        for (const img of bundle) {
-            sliderWrap.innerHTML += img.outerHTML;
-        }
-
-        // When the first image is loaded ...
-        sliderWrap.children[0].addEventListener("load", CenterPopUp);
-
-        // if device is a tablet //
-        if (tabletScreen) {
-            // set height for caption to fit with the image //
-            sliderWrap.children[0].addEventListener("load", SetCaptionHeight);
-        }
-
-        // When all images are loaded ...
-        sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
-            // Scroll to the current slide //
-            ScrollImage();
-        });
-
-        // Fill caption //
-        let popupCaption = document.querySelector("#popup-caption");
-        popupCaption.innerHTML = caption;
-
-        document.getElementById("slide-indicator").style.display = "flex";
-        for (let i = 0; i < bundle.length; i++) {
-            dotsWrapper.innerHTML += "<span class='dot'></span>"
-        }
-
-        dots = document.getElementsByClassName("dot");
-
-        // Set suitable width for dots wrapper //
-        dotsWrapper.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
-
-        // Highlight current slide //
-        dots[slider.currentSlide].style.backgroundColor = "white";
-
-        sliderWrap.addEventListener("touchstart", ReadFirstTouch);
-        sliderWrap.addEventListener("touchmove", ReadTouchMove);
-        sliderWrap.addEventListener("touchend", ReadTouchEnd);
-
-        // Prevent scrolling on touchpad when on laptop //
-        sliderWrap.addEventListener("mousewheel", function(event){
-            event.preventDefault();
-        });
-
-        // if user's device is not a touch screen //
-        if (!touchScreen) {   
+        // if this is a bundle of images //
+        else {
+            let targetBundle = this.previousElementSibling.previousElementSibling.previousElementSibling;
+            let caption = this.previousElementSibling.innerHTML;
+    
+            // Check index of this bundle //
+            for (let i = 0; i < bundles.length; i++) {
+                if (bundles[i] == targetBundle) {
+                    slider.bundleIndex = i;
+                }
+            }
+    
+            // Check out its current slide //
+            slider.currentSlide = currentSlides[slider.bundleIndex];
+    
+            // Get its children images //
+            bundle = targetBundle.children;
+    
+            // Fill the slider with those images //
+            let sliderWrap = document.getElementById("popup-img");
+            for (const img of bundle) {
+                sliderWrap.innerHTML += img.outerHTML;
+            }
+    
             // When the first image is loaded ...
-            sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
-
-            document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
-            document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
+            sliderWrap.children[0].addEventListener("load", CenterPopUp);
+    
+            // if device is a tablet //
+            if (tabletScreen) {
+                // set height for caption to fit with the image //
+                sliderWrap.children[0].addEventListener("load", SetCaptionHeight);
+            }
+    
+            // When all images are loaded ...
+            sliderWrap.children[bundle.length - 1].addEventListener("load", function() {
+                // Scroll to the current slide //
+                ScrollImage();
+            });
+    
+            // Fill caption //
+            let popupCaption = document.querySelector("#popup-caption");
+            popupCaption.innerHTML = caption;
+    
+            document.getElementById("slide-indicator").style.display = "flex";
+            for (let i = 0; i < bundle.length; i++) {
+                dotsWrapper.innerHTML += "<span class='dot'></span>"
+            }
+    
+            dots = document.getElementsByClassName("dot");
+    
+            // Set suitable width for dots wrapper //
+            dotsWrapper.style.width = (bundle.length * dots[0].offsetWidth + 5 * (bundle.length - 1)) + "px";
+    
+            // Highlight current slide //
+            dots[slider.currentSlide].style.backgroundColor = "white";
+    
+            sliderWrap.addEventListener("touchstart", ReadFirstTouch);
+            sliderWrap.addEventListener("touchmove", ReadTouchMove);
+            sliderWrap.addEventListener("touchend", ReadTouchEnd);
+    
+            // Prevent scrolling on touchpad when on laptop //
+            sliderWrap.addEventListener("mousewheel", function(event){
+                event.preventDefault();
+            });
+    
+            // if user's device is not a touch screen //
+            if (!touchScreen) {   
+                // When the first image is loaded ...
+                sliderWrap.children[0].addEventListener("load", CenterNavigatorButtons);
+    
+                document.getElementById("popup-img-and-buttons").addEventListener("mouseover", DisplayNavigator);
+                document.getElementById("popup-img-and-buttons").addEventListener("mouseout", HideNavigator);
+            }
         }
     }
 }
@@ -334,6 +366,12 @@ for (const wrapper of imgWrapper) {
 
 let bundleWrapper = document.getElementsByClassName("bundle-wrapper");
 for (const wrapper of bundleWrapper) {
+    wrapper.addEventListener("mouseover", DisplayToolTip);
+    wrapper.addEventListener("mouseout", HideToolTip);
+}
+
+let videoWrapper = document.getElementsByClassName("video-wrapper");
+for (const wrapper of videoWrapper) {
     wrapper.addEventListener("mouseover", DisplayToolTip);
     wrapper.addEventListener("mouseout", HideToolTip);
 }
