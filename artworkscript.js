@@ -375,6 +375,10 @@ let videoWrapper = document.getElementsByClassName("video-wrapper");
 for (const wrapper of videoWrapper) {
     wrapper.addEventListener("mouseover", DisplayToolTip);
     wrapper.addEventListener("mouseout", HideToolTip);
+
+    if (parseFloat(window.getComputedStyle(wrapper, null).getPropertyValue('grid-template-rows')) < parseFloat(window.getComputedStyle(wrapper, null).getPropertyValue('grid-template-columns'))) {
+        wrapper.style.height = parseFloat(window.getComputedStyle(wrapper, null).getPropertyValue('grid-template-columns')) + "px";
+    }
 }
 
 for (const toolTip of toolTips) {

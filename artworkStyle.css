@@ -407,12 +407,9 @@ video {
 .video-to-display {
     grid-column: 1;
     grid-row: 1;
-<<<<<<< HEAD
     background-color: black;
     display: flex;
     align-items: center;
-=======
->>>>>>> 83b76a7a819643317f2ec63e8fa3023233b8fd75
 }
 
 .video-icon {
