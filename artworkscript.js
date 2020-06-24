@@ -62,6 +62,12 @@ function PopUpImage() {
         imgToDisplay.src = this.previousElementSibling.previousElementSibling.src;
         imgToDisplay.alt = this.previousElementSibling.previousElementSibling.alt;
 
+        if (!belowLaptopScreen) {
+            imgToDisplay.parentNode.style.justifyContent = "center";
+            imgToDisplay.style.maxHeight = window.innerHeight / 100 * 70 + "px";
+            imgToDisplay.style.width = window.innerHeight / 100 * 70 + "px";
+        }
+
         // When the image is loaded ...
         imgToDisplay.addEventListener("load", CenterPopUp);
 
@@ -89,7 +95,8 @@ function PopUpImage() {
                 videoToDisplay.parentNode.style.maxHeight = window.innerHeight / 100 * 50 + "px";
             }
             else {
-                videoToDisplay.parentNode.style.height = window.innerHeight / 100 * 85 + "px";
+                // videoToDisplay.parentNode.style.width = window.innerWidth / 100 * 80 + "px";
+                videoToDisplay.parentNode.style.maxHeight = "400px";
             }
 
             // When the video is loaded ...
@@ -98,7 +105,7 @@ function PopUpImage() {
             // if device is a tablet //
             if (tabletScreen) {
                 // set height for caption to fit with the image //
-                videoToDisplay.addEventListener("load", SetCaptionHeight);
+                videoToDisplay.parentNode.addEventListener("load", SetCaptionHeight);
             }
 
             // Fill caption //
@@ -344,6 +351,7 @@ function CloseImage(event) {
             document.getElementById("popup-img-and-buttons").removeEventListener("mouseout", HideNavigator);
         }
         document.getElementById("popup-img").innerHTML = "";
+        document.getElementById("popup-img").style.justifyContent = "unset";
         dotsWrapper.innerHTML = "";
         document.getElementById("slide-indicator").style.display = "none";
         popup.style.display = "none";
